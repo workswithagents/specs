@@ -46,6 +46,36 @@ The detailed, normative specification content. Use [RFC 2119](https://www.ietf.o
 ## 5. Examples
 ```
 
+### Required: Versioned Examples
+
+Every new spec version MUST include matching implementation examples in a versioned directory alongside the spec file:
+
+```
+{spec-name}/
+  v{version}/
+    python.md    — complete Python implementation
+    typescript.md — complete TypeScript implementation
+    curl.md       — curl command examples
+```
+
+The spec file MUST include an `## Examples` section linking to these files. See existing specs for the format.
+
+## Examples Stub
+
+```markdown
+---
+
+## Examples
+
+Implementation examples for this version:
+
+| Language | File |
+|----------|------|
+| Python | [{spec-name}/v{version}/python.md]({spec-name}/v{version}/python.md) |
+| TypeScript | [{spec-name}/v{version}/typescript.md]({spec-name}/v{version}/typescript.md) |
+| cURL | [{spec-name}/v{version}/curl.md]({spec-name}/v{version}/curl.md) |
+```
+
 ## Security Considerations
 
 What are the security implications of this specification?

@@ -296,3 +296,16 @@ Recommended: SQLite+WAL for local fleets, FactBase API for distributed fleets.
 ---
 
 *This document is part of the Agent OSI Model framework. See Layer 3 (Agent Capability Manifest) for the discovery mechanism this protocol depends on.*
+
+---
+
+## Examples
+
+Implementation examples for this version:
+
+| Language | File |
+|----------|------|
+| Python | [coordination/v1.0.0/python.md](coordination/v1.0.0/python.md) |
+| TypeScript | [coordination/v1.0.0/typescript.md](coordination/v1.0.0/typescript.md) |
+| cURL | [coordination/v1.0.0/curl.md](coordination/v1.0.0/curl.md) |
+

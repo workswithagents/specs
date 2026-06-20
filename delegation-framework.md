@@ -501,3 +501,16 @@ def issue_delegation(subject_id, scope, ttl_minutes=60, parent_token_id=None):
 ---
 
 *CC BY 4.0. Free to implement. Attribution required. Companion to the AI Gateway / PEP (./ai-gateway.md) and Agent Registry (./agent-registry.md). Part of the Works With Agents governance suite.*
+
+---
+
+## Examples
+
+Implementation examples for this version:
+
+| Language | File |
+|----------|------|
+| Python | [delegation-framework/v1.0.0/python.md](delegation-framework/v1.0.0/python.md) |
+| TypeScript | [delegation-framework/v1.0.0/typescript.md](delegation-framework/v1.0.0/typescript.md) |
+| cURL | [delegation-framework/v1.0.0/curl.md](delegation-framework/v1.0.0/curl.md) |
+

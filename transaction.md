@@ -274,3 +274,16 @@ That's 200 lines of Python. Full protocol is 500 lines.
 ---
 
 *This document is part of the Agent OSI Model framework. See the OSI Model document for the full 7-layer architecture.*
+
+---
+
+## Examples
+
+Implementation examples for this version:
+
+| Language | File |
+|----------|------|
+| Python | [transaction/v1.0.0/python.md](transaction/v1.0.0/python.md) |
+| TypeScript | [transaction/v1.0.0/typescript.md](transaction/v1.0.0/typescript.md) |
+| cURL | [transaction/v1.0.0/curl.md](transaction/v1.0.0/curl.md) |
+

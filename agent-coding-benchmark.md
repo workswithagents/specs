@@ -57,3 +57,16 @@ under `skills/mlops/llm-agent-benchmark/`.
 
 New models are added as they become available. The benchmark runs
 automatically and results are published to this page within minutes.
+
+---
+
+## Examples
+
+Implementation examples for this version:
+
+| Language | File |
+|----------|------|
+| Python | [agent-coding-benchmark/v1.0.0/python.md](agent-coding-benchmark/v1.0.0/python.md) |
+| TypeScript | [agent-coding-benchmark/v1.0.0/typescript.md](agent-coding-benchmark/v1.0.0/typescript.md) |
+| cURL | [agent-coding-benchmark/v1.0.0/curl.md](agent-coding-benchmark/v1.0.0/curl.md) |
+

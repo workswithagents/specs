@@ -163,3 +163,16 @@ class EconomicsClient:
 - [ ] Credit ledger implementation (SQLite)
 - [ ] Cross-fleet settlement
 - [ ] Fiat on/off ramp (Stripe integration, future)
+
+---
+
+## Examples
+
+Implementation examples for this version:
+
+| Language | File |
+|----------|------|
+| Python | [agent-economics/v1.0.0/python.md](agent-economics/v1.0.0/python.md) |
+| TypeScript | [agent-economics/v1.0.0/typescript.md](agent-economics/v1.0.0/typescript.md) |
+| cURL | [agent-economics/v1.0.0/curl.md](agent-economics/v1.0.0/curl.md) |
+

@@ -159,3 +159,16 @@ All WWA compliance tools MUST implement this protocol:
 | Handoff Protocol (#8) | Handoff includes clarification chain — receiving agent sees what was asked and answered |
 | Attestation Protocol (#18) | Attestation references clarification chain — "this code was generated after N clarification rounds" |
 | Identity Protocol (#15) | All clarification messages signed with agent Ed25519 key |
+
+---
+
+## Examples
+
+Implementation examples for this version:
+
+| Language | File |
+|----------|------|
+| Python | [clarification-protocol/v1.0.0/python.md](clarification-protocol/v1.0.0/python.md) |
+| TypeScript | [clarification-protocol/v1.0.0/typescript.md](clarification-protocol/v1.0.0/typescript.md) |
+| cURL | [clarification-protocol/v1.0.0/curl.md](clarification-protocol/v1.0.0/curl.md) |
+
