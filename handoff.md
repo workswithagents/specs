@@ -140,3 +140,15 @@ Before accepting a handoff, the receiving agent SHOULD verify:
 | IACP | L5 | Handoff messages are carried over IACP as `intent: handoff` |
 | Transaction Protocol | L7 | Handoff acceptance creates a transaction audit entry |
 | Compliance-as-Code | L7 | Quality checklist is a Compliance-as-Code rule set |
+
+---
+
+## Examples
+
+Implementation examples for this version:
+
+| Language | File |
+|----------|------|
+| Python | [handoff/v1.0.0/python.md](handoff/v1.0.0/python.md) |
+| TypeScript | [handoff/v1.0.0/typescript.md](handoff/v1.0.0/typescript.md) |
+| cURL | [handoff/v1.0.0/curl.md](handoff/v1.0.0/curl.md) |
