@@ -179,3 +179,15 @@ class IACPClient:
 - [ ] WebSocket transport
 - [ ] Formal verification of message ordering
 - [ ] MCP SEP proposal (extension to MCP for agent→agent communication)
+
+---
+
+## Examples
+
+Implementation examples for this version:
+
+| Language | File |
+|----------|------|
+| Python | [iacp/v1.0.0/python.md](iacp/v1.0.0/python.md) |
+| TypeScript | [iacp/v1.0.0/typescript.md](iacp/v1.0.0/typescript.md) |
+| cURL | [iacp/v1.0.0/curl.md](iacp/v1.0.0/curl.md) |
