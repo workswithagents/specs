@@ -395,3 +395,15 @@ requests.post(f"https://registry.workswithagents.dev/v1/registry/{agent_id}/hear
 ---
 
 *CC BY 4.0. Free to implement. Attribution required. Companion to the Agent Identity Protocol (./identity.md) and part of the Works With Agents governance suite.*
+
+---
+
+## Examples
+
+Implementation examples for this version:
+
+| Language | File |
+|----------|------|
+| Python | [agent-registry/v1.0.0/python.md](agent-registry/v1.0.0/python.md) |
+| TypeScript | [agent-registry/v1.0.0/typescript.md](agent-registry/v1.0.0/typescript.md) |
+| cURL | [agent-registry/v1.0.0/curl.md](agent-registry/v1.0.0/curl.md) |

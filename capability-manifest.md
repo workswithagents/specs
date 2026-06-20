@@ -224,3 +224,15 @@ trust_score = 0.30 × success_rate
 ---
 
 *This document is part of the Agent OSI Model framework. See Layer 5 (Coordination Protocol) for how manifests are used in work distribution.*
+
+---
+
+## Examples
+
+Implementation examples for this version:
+
+| Language | File |
+|----------|------|
+| Python | [capability-manifest/v1.0.0/python.md](capability-manifest/v1.0.0/python.md) |
+| TypeScript | [capability-manifest/v1.0.0/typescript.md](capability-manifest/v1.0.0/typescript.md) |
+| cURL | [capability-manifest/v1.0.0/curl.md](capability-manifest/v1.0.0/curl.md) |
