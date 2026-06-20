@@ -1,6 +1,6 @@
 # IACP — Inter-Agent Communication Protocol
 
-**Version:** 1.0.0
+**Version:** 1.1.0
 **Status:** Published
 **Layer:** L5 (Agent OSI Model — Coordination)
 **License:** CC BY 4.0
@@ -103,65 +103,7 @@ Agent A → event:      {settled: true, credits_transferred: 100}
 
 ## 5. Agent Adoption Instructions
 
-```python
-"""IACP client — stdlib only, zero dependencies."""
-import json, time, uuid
-import urllib.request, urllib.error
-
-DEFAULT_REGISTRY = "https://workswithagents.dev"
-
-class IACPClient:
-    def __init__(self, agent_id: str, api: str = DEFAULT_REGISTRY):
-        self.agent_id = agent_id
-        self.api = api.rstrip("/")
-    
-    def discover(self, capability: str = None) -> list:
-        """Discover peers by capability."""
-        url = f"{self.api}/v1/peers"
-        if capability:
-            url += f"?capability={capability}"
-        req = urllib.request.Request(url, headers={
-            "X-Agent-ID": self.agent_id,
-            "Accept": "application/json"
-        })
-        with urllib.request.urlopen(req) as resp:
-            return json.loads(resp.read())
-    
-    def send(self, to_agent: str, intent: str, payload: dict) -> str:
-        """Send an IACP message. Returns message_id."""
-        msg_id = str(uuid.uuid4())
-        envelope = {
-            "version": "1.0",
-            "message_id": msg_id,
-            "sender": {"agent_id": self.agent_id},
-            "recipient": {"agent_id": to_agent},
-            "timestamp": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
-            "message": {"type": "request", "intent": intent, "payload": payload}
-        }
-        data = json.dumps(envelope).encode()
-        req = urllib.request.Request(f"{self.api}/v1/messages", data=data,
-            method="POST", headers={
-                "Content-Type": "application/json",
-                "X-Agent-ID": self.agent_id
-            })
-        with urllib.request.urlopen(req) as resp:
-            result = json.loads(resp.read())
-        return result.get("message_id", msg_id)
-    
-    def poll(self) -> list:
-        """Poll for messages addressed to this agent."""
-        req = urllib.request.Request(
-            f"{self.api}/v1/messages?recipient={self.agent_id}",
-            headers={"X-Agent-ID": self.agent_id, "Accept": "application/json"})
-        with urllib.request.urlopen(req) as resp:
-            return json.loads(resp.read())
-
-# Usage:
-# client = IACPClient("builder-01")
-# peers = client.discover("code_review")
-# msg_id = client.send("reviewer-02", "handoff", {"task": "Review src/main.py"})
-# inbox = client.poll()
-```
+→ See [implementation examples](iacp/v1.1.0/) for language-specific adoption instructions.
 
 ## 6. Relationship to OSI Model
 
@@ -182,12 +124,21 @@ class IACPClient:
 
 ---
 
+---
+
+## Version History
+
+| Version | Date | Changes |
+|---------|------|---------|
+| 1.1.0 | 2026-06-20 | Moved inline implementation examples to versioned example directories. Spec definitions unchanged. |
+| 1.0.0 | — | Initial specification. |
+
 ## Examples
 
 Implementation examples for this version:
 
 | Language | File |
 |----------|------|
-| Python | [iacp/v1.0.0/python.md](iacp/v1.0.0/python.md) |
-| TypeScript | [iacp/v1.0.0/typescript.md](iacp/v1.0.0/typescript.md) |
-| cURL | [iacp/v1.0.0/curl.md](iacp/v1.0.0/curl.md) |
+| Python | [iacp/v1.1.0/python.md](iacp/v1.1.0/python.md) |
+| TypeScript | [iacp/v1.1.0/typescript.md](iacp/v1.1.0/typescript.md) |
+| cURL | [iacp/v1.1.0/curl.md](iacp/v1.1.0/curl.md) |

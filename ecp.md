@@ -1,6 +1,6 @@
 # Ephemeral Communication Protocol — L5 Coordination
 
-**Version:** 1.0.0
+**Version:** 1.1.0
 **Status:** Published
 **Layer:** 5 — Coordination (Agent OSI Model), with L7 Governance (TTL enforcement)
 **License:** CC BY 4.0
@@ -245,28 +245,13 @@ The server tracks TTL independently of WebSocket connections. If a participant d
 
 ## 11. Adoption
 
-### For Agent Operators
-
-```
-# Create a room
-curl -X POST https://ecp.workswithagents.dev/v1/rooms \
-  -H "Content-Type: application/json" \
-  -d '{"ttl_hours": 24}'
-
-# Connect via WebSocket
-wscat -c wss://ecp.workswithagents.dev/v1/ws/ecp_a1b2c3d4?token=ecp_token_e5f6g7h8
-```
-
-### For Humans
-
-Visit `https://ecp.workswithagents.dev` — enter or create a room. No signup. The URL is the key. Share it with one person. After the TTL, it's gone.
-
----
+→ See [implementation examples](ecp/v1.1.0/) for language-specific adoption instructions.
 
 ## 12. Version History
 
 | Version | Date | Changes |
 |---------|------|---------|
+| 1.1.0 | 2026-06-20 | Moved inline implementation examples to versioned example directories. Spec definitions unchanged. |
 | 1.0.0 | 2026-05-10 | Published. Room lifecycle, queue model, RAM-only guarantee. |
 | 1.0.0-draft | 2026-05-08 | Initial draft. |
 
@@ -282,7 +267,7 @@ Implementation examples for this version:
 
 | Language | File |
 |----------|------|
-| Python | [ecp/v1.0.0/python.md](ecp/v1.0.0/python.md) |
-| TypeScript | [ecp/v1.0.0/typescript.md](ecp/v1.0.0/typescript.md) |
-| cURL | [ecp/v1.0.0/curl.md](ecp/v1.0.0/curl.md) |
+| Python | [ecp/v1.1.0/python.md](ecp/v1.1.0/python.md) |
+| TypeScript | [ecp/v1.1.0/typescript.md](ecp/v1.1.0/typescript.md) |
+| cURL | [ecp/v1.1.0/curl.md](ecp/v1.1.0/curl.md) |
 

@@ -1,6 +1,6 @@
 # Agent Registry — L3 Discovery / L7 Governance
 
-**Version:** 1.0.0
+**Version:** 1.1.0
 **Status:** Published
 **Layer:** 3 (Discovery) / 7 (Governance) — Agent OSI Model
 **License:** CC BY 4.0
@@ -40,7 +40,7 @@ agent_id: "deploy-bot-v2"               # unique, human-readable
 identity_ref:                            # link to Identity Protocol
   public_key: "ed25519:abc123def456..."
   key_fingerprint: "sha256:f1d2..."       # for quick verification
-  identity_version: "1.0.0"
+  identity_version: "1.1.0"
 created_at: "2026-05-26T12:00:00Z"
 updated_at: "2026-05-26T14:30:00Z"
 
@@ -326,63 +326,7 @@ Multiple registries that trust each other's signatures. Agent A in Org 1 delegat
 
 ## 9. Agent Adoption Instructions
 
-### Step 1: Register your agent
-
-```bash
-# Generate keypair (if not already done via Identity Protocol)
-python3 -c "
-from cryptography.hazmat.primitives.asymmetric import ed25519
-import json, time
-
-pk = ed25519.Ed25519PrivateKey.generate()
-pub = pk.public_key()
-
-# Save private key
-with open('agent_key.pem', 'wb') as f:
-    f.write(pk.private_bytes(...))
-
-# Print public key hex for registration
-print(pub.public_bytes_raw().hex())
-"
-
-# Register
-curl -X POST https://registry.workswithagents.dev/v1/registry/register \
-  -H "Content-Type: application/json" \
-  -d '{
-    "agent_id": "my-agent",
-    "public_key": "<public-key-hex>",
-    "capabilities": ["deploy:staging"],
-    "owner": "user@example.com"
-  }'
-```
-
-### Step 2: Check status before acting
-
-```python
-import requests
-
-def check_agent_allowed(agent_id):
-    """Verify agent is registered and active before proceeding."""
-    resp = requests.get(f"https://registry.workswithagents.dev/v1/registry/{agent_id}")
-    if resp.status_code != 200:
-        return False, "Agent not found in registry"
-    data = resp.json()
-    if data["status"] != "active":
-        return False, f"Agent status: {data['status']}"
-    return True, "Agent allowed"
-```
-
-### Step 3: Report status
-
-```python
-# Periodically send heartbeats (optional, improves monitoring)
-requests.post(f"https://registry.workswithagents.dev/v1/registry/{agent_id}/heartbeat", json={
-    "timestamp": int(time.time()),
-    "signature": agent_sign(message)
-})
-```
-
----
+→ See [implementation examples](agent-registry/v1.1.0/) for language-specific adoption instructions.
 
 ## 10. Standards Alignment
 
@@ -398,12 +342,21 @@ requests.post(f"https://registry.workswithagents.dev/v1/registry/{agent_id}/hear
 
 ---
 
+---
+
+## Version History
+
+| Version | Date | Changes |
+|---------|------|---------|
+| 1.1.0 | 2026-06-20 | Moved inline implementation examples to versioned example directories. Spec definitions unchanged. |
+| 1.0.0 | — | Initial specification. |
+
 ## Examples
 
 Implementation examples for this version:
 
 | Language | File |
 |----------|------|
-| Python | [agent-registry/v1.0.0/python.md](agent-registry/v1.0.0/python.md) |
-| TypeScript | [agent-registry/v1.0.0/typescript.md](agent-registry/v1.0.0/typescript.md) |
-| cURL | [agent-registry/v1.0.0/curl.md](agent-registry/v1.0.0/curl.md) |
+| Python | [agent-registry/v1.1.0/python.md](agent-registry/v1.1.0/python.md) |
+| TypeScript | [agent-registry/v1.1.0/typescript.md](agent-registry/v1.1.0/typescript.md) |
+| cURL | [agent-registry/v1.1.0/curl.md](agent-registry/v1.1.0/curl.md) |

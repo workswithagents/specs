@@ -1,6 +1,6 @@
 # Agent Attestation Protocol — Layer 7
 
-**Version:** 1.0.0
+**Version:** 1.1.0
 **Status:** Published
 **Layer:** 7 — Audit (Agent OSI Model)
 **License:** CC BY 4.0
@@ -126,30 +126,13 @@ For an attestation to be verifiable, generation MUST be deterministic:
 | Agent version pinned | N/A | Version locked in attestation |
 
 **Reproducibility test:**
-```bash
-# Run twice with same inputs → compare output hashes
-INPUT='{"description":"Training tracker","compliance":["jsp-440"],"languages":["en-us","en-gb"]}'
-HASH1=$(echo "$INPUT" | python3.11 -m wwa_scaffold_mcp.server | sha256sum)
-HASH2=$(echo "$INPUT" | python3.11 -m wwa_scaffold_mcp.server | sha256sum)
-[ "$HASH1" = "$HASH2" ] && echo "✅ Deterministic" || echo "❌ Non-deterministic"
-```
+→ See [implementation examples](attestation-protocol/v1.1.0/) for reproducibility testing commands and verification workflows.
 
 ## 5. Git Signed Commits
 
 Every attested scaffold MUST produce a signed git commit:
 
-```
-git commit -S -m "[wwa-scaffold][attested] TrainingTracker — JSP 440 + WCAG 2.2 AA
-
-Attestation: sha256:abc123...
-Session: session-uuid
-Files: 24 (20 created, 4 updated)
-Standards: jsp-440, wcag-2-2-aa
-Languages: en-us, en-gb
-Build: ✅ exit 0 zero errors
-Verification: python3.11 -m wwa_scaffold_mcp.server --verify-attestation sha256:abc123...
-"
-```
+→ See [implementation examples](attestation-protocol/v1.1.0/) for signed commit examples and attestation workflows.
 
 The `-S` flag uses GPG or SSH signing. The agent's signing key is distinct from the developer's personal key — it's the agent's Ed25519 identity key from the WWA Identity Protocol.
 
@@ -267,13 +250,22 @@ Auditor conclusion:
 
 ---
 
+---
+
+## Version History
+
+| Version | Date | Changes |
+|---------|------|---------|
+| 1.1.0 | 2026-06-20 | Moved inline implementation examples to versioned example directories. Spec definitions unchanged. |
+| 1.0.0 | — | Initial specification. |
+
 ## Examples
 
 Implementation examples for this version:
 
 | Language | File |
 |----------|------|
-| Python | [attestation-protocol/v1.0.0/python.md](attestation-protocol/v1.0.0/python.md) |
-| TypeScript | [attestation-protocol/v1.0.0/typescript.md](attestation-protocol/v1.0.0/typescript.md) |
-| cURL | [attestation-protocol/v1.0.0/curl.md](attestation-protocol/v1.0.0/curl.md) |
+| Python | [attestation-protocol/v1.1.0/python.md](attestation-protocol/v1.1.0/python.md) |
+| TypeScript | [attestation-protocol/v1.1.0/typescript.md](attestation-protocol/v1.1.0/typescript.md) |
+| cURL | [attestation-protocol/v1.1.0/curl.md](attestation-protocol/v1.1.0/curl.md) |
 

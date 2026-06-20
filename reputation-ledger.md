@@ -1,7 +1,7 @@
 # Agent Reputation Ledger
 
 **Status:** Published
-**Version:** 1.0.0
+**Version:** 1.1.0
 **Layer:** Cross-layer (L2/L3 Identity + L5 Coordination)
 **License:** CC BY 4.0
 
@@ -105,57 +105,7 @@ GET /v1/reputation/agents/builder-01?org=nhs-trust-b
 
 ## 5. Agent Adoption Instructions
 
-```python
-"""Reputation client — stdlib only."""
-import json, uuid
-import urllib.request
-
-DEFAULT_API = "https://workswithagents.dev"
-
-class ReputationClient:
-    def __init__(self, agent_id: str, api: str = DEFAULT_API):
-        self.agent_id = agent_id
-        self.api = api.rstrip("/")
-    
-    def query(self, target_agent: str, scope: str = "public") -> dict:
-        """Query an agent's reputation profile."""
-        url = f"{self.api}/v1/reputation/agents/{target_agent}"
-        if scope:
-            url += f"?scope={scope}"
-        req = urllib.request.Request(url, headers={
-            "X-Agent-ID": self.agent_id,
-            "Accept": "application/json"
-        })
-        with urllib.request.urlopen(req) as resp:
-            return json.loads(resp.read())
-    
-    def submit_claim(self, target: str, event_type: str,
-                     outcome: str, metrics: dict,
-                     signature: str, pubkey: str) -> str:
-        """Submit a verifiable claim. Requires cryptographic signature."""
-        claim = {
-            "claim": {
-                "subject": target,
-                "verifier": self.agent_id,
-                "event": {"type": event_type, "outcome": outcome,
-                          "metrics": metrics},
-                "scope": "public"
-            },
-            "signature": signature,
-            "public_key": pubkey
-        }
-        data = json.dumps(claim).encode()
-        req = urllib.request.Request(
-            f"{self.api}/v1/reputation/claims", data=data,
-            method="POST", headers={"Content-Type": "application/json"})
-        with urllib.request.urlopen(req) as resp:
-            return json.loads(resp.read())["claim_id"]
-
-# Usage:
-# rc = ReputationClient("reviewer-02")
-# profile = rc.query("builder-01")
-# print(f"Completion rate: {profile['profile']['summary']['task_completion_rate']}")
-```
+→ See [implementation examples](reputation-ledger/v1.1.0/) for language-specific adoption instructions.
 
 ## 6. Relationship to OSI Model
 
@@ -175,13 +125,22 @@ class ReputationClient:
 
 ---
 
+---
+
+## Version History
+
+| Version | Date | Changes |
+|---------|------|---------|
+| 1.1.0 | 2026-06-20 | Moved inline implementation examples to versioned example directories. Spec definitions unchanged. |
+| 1.0.0 | — | Initial specification. |
+
 ## Examples
 
 Implementation examples for this version:
 
 | Language | File |
 |----------|------|
-| Python | [reputation-ledger/v1.0.0/python.md](reputation-ledger/v1.0.0/python.md) |
-| TypeScript | [reputation-ledger/v1.0.0/typescript.md](reputation-ledger/v1.0.0/typescript.md) |
-| cURL | [reputation-ledger/v1.0.0/curl.md](reputation-ledger/v1.0.0/curl.md) |
+| Python | [reputation-ledger/v1.1.0/python.md](reputation-ledger/v1.1.0/python.md) |
+| TypeScript | [reputation-ledger/v1.1.0/typescript.md](reputation-ledger/v1.1.0/typescript.md) |
+| cURL | [reputation-ledger/v1.1.0/curl.md](reputation-ledger/v1.1.0/curl.md) |
 

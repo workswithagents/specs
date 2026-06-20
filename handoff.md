@@ -1,6 +1,6 @@
 # Handoff Protocol — Layer 4
 
-**Version:** 1.0.0
+**Version:** 1.1.0
 **Status:** Published
 **Layer:** 4 — Session (Agent OSI Model)
 **License:** CC BY 4.0
@@ -143,12 +143,21 @@ Before accepting a handoff, the receiving agent SHOULD verify:
 
 ---
 
+---
+
+## Version History
+
+| Version | Date | Changes |
+|---------|------|---------|
+| 1.1.0 | 2026-06-20 | Moved inline implementation examples to versioned example directories. Spec definitions unchanged. |
+| 1.0.0 | — | Initial specification. |
+
 ## Examples
 
 Implementation examples for this version:
 
 | Language | File |
 |----------|------|
-| Python | [handoff/v1.0.0/python.md](handoff/v1.0.0/python.md) |
-| TypeScript | [handoff/v1.0.0/typescript.md](handoff/v1.0.0/typescript.md) |
-| cURL | [handoff/v1.0.0/curl.md](handoff/v1.0.0/curl.md) |
+| Python | [handoff/v1.1.0/python.md](handoff/v1.1.0/python.md) |
+| TypeScript | [handoff/v1.1.0/typescript.md](handoff/v1.1.0/typescript.md) |
+| cURL | [handoff/v1.1.0/curl.md](handoff/v1.1.0/curl.md) |

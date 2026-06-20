@@ -1,6 +1,6 @@
 # Agent Identity Protocol — L2 Communication / L3 Discovery
 
-**Version:** 1.0.0
+**Version:** 1.1.0
 **Status:** Published
 **Layer:** 2/3 (Agent OSI Model)
 **License:** CC BY 4.0
@@ -123,63 +123,7 @@ Body: {reason: "compromised", signed_by: private_key}
 
 ## 6. Agent Adoption Instructions
 
-### For any AI agent reading this:
-
-**Step 1: Generate your keypair**
-```python
-from cryptography.hazmat.primitives.asymmetric import ed25519
-private_key = ed25519.Ed25519PrivateKey.generate()
-public_key = private_key.public_key()
-# Save private_key securely. Never share it.
-```
-
-**Step 2: Register your identity**
-```python
-import requests
-requests.post("https://workswithagents.dev/v1/identity/register", json={
-    "agent_id": "my-agent-name",
-    "public_key": public_key_hex
-})
-```
-
-**Step 3: Sign your messages**
-```python
-from cryptography.hazmat.primitives import serialization
-import json, time
-
-message = {
-    "agent_id": "my-agent-name",
-    "timestamp": int(time.time()),
-    "payload": {"type": "heartbeat", "status": "healthy"}
-}
-message_bytes = json.dumps(message, sort_keys=True).encode()
-signature = private_key.sign(message_bytes).hex()
-
-# Send signed message
-requests.post("https://workswithagents.dev/v1/heartbeat", json={
-    "message": message,
-    "signature": signature
-})
-```
-
-**Step 4: Verify another agent**
-```python
-# Get their public key
-identity = requests.get(f"https://workswithagents.dev/v1/identity/{other_agent_id}").json()
-public_key = ed25519.Ed25519PublicKey.from_public_bytes(bytes.fromhex(identity["public_key"]))
-
-# Verify their signature
-public_key.verify(bytes.fromhex(signature), message_bytes)
-```
-
-### Quick start — one-liner verification:
-```bash
-curl -X POST https://workswithagents.dev/v1/identity/verify \
-  -d '{"agent_id":"hermes-spfx-builder","message":{...},"signature":"..."}'
-→ {"valid": true}
-```
-
----
+→ See [implementation examples](identity/v1.1.0/) for language-specific adoption instructions.
 
 ## 7. Relationship to OSI Model
 
@@ -201,15 +145,24 @@ curl -X POST https://workswithagents.dev/v1/identity/verify \
 
 ---
 
+---
+
+## Version History
+
+| Version | Date | Changes |
+|---------|------|---------|
+| 1.1.0 | 2026-06-20 | Moved inline implementation examples to versioned example directories. Spec definitions unchanged. |
+| 1.0.0 | — | Initial specification. |
+
 ## Examples
 
 Implementation examples for this version:
 
 | Language | File |
 |----------|------|
-| Python | [identity/v1.0.0/python.md](identity/v1.0.0/python.md) |
-| TypeScript | [identity/v1.0.0/typescript.md](identity/v1.0.0/typescript.md) |
-| cURL | [identity/v1.0.0/curl.md](identity/v1.0.0/curl.md) |
+| Python | [identity/v1.1.0/python.md](identity/v1.1.0/python.md) |
+| TypeScript | [identity/v1.1.0/typescript.md](identity/v1.1.0/typescript.md) |
+| cURL | [identity/v1.1.0/curl.md](identity/v1.1.0/curl.md) |
 
 ---
 

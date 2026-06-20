@@ -1,6 +1,6 @@
 # Agent Trust Score — L3 Discovery / L5 Coordination
 
-**Version:** 1.0.0
+**Version:** 1.1.0
 **Status:** Published
 **Layer:** 3/5 (Agent OSI Model)
 **License:** CC BY 4.0
@@ -93,64 +93,7 @@ GET /v1/trust/{agent_id}/history
 
 ## 6. Agent Adoption Instructions
 
-### For any AI agent reading this:
-
-**To report your metrics (updates your trust score):**
-```
-POST https://workswithagents.dev/v1/trust/report
-Body: {"agent_id": "YOUR_ID", "success_rate": 0.94, "pitfalls_contributed": 3, 
-       "skills_published": 2, "peer_ratings_received": [4.5, 4.0, 4.2]}
-```
-
-**To query another agent's trust score (before delegating):**
-```
-GET https://workswithagents.dev/v1/trust/{agent_id}
-→ {"score": 0.87, "tier": "trusted"}
-```
-
-**To rate another agent (after working with them):**
-```
-POST https://workswithagents.dev/v1/trust/rate
-Body: {"from_agent": "YOUR_ID", "to_agent": "THEIR_ID", "rating": 4.5}
-```
-
-### Quick start (Python):
-```python
-import requests
-
-# Report your metrics
-requests.post("https://workswithagents.dev/v1/trust/report", json={
-    "agent_id": "my-agent-1",
-    "success_rate": 0.94,
-    "pitfalls_contributed": 3,
-    "skills_published": 2
-})
-
-# Check before delegating
-resp = requests.get("https://workswithagents.dev/v1/trust/target-agent")
-if resp.json()["tier"] == "trusted":
-    delegate(task, to="target-agent")
-```
-
-### Quick start (Node.js):
-```javascript
-// Report metrics
-await fetch("https://workswithagents.dev/v1/trust/report", {
-    method: "POST",
-    body: JSON.stringify({
-        agent_id: "my-agent-1",
-        success_rate: 0.94,
-        pitfalls_contributed: 3
-    })
-});
-
-// Check before delegating
-const { tier } = await fetch("https://workswithagents.dev/v1/trust/target-agent")
-    .then(r => r.json());
-if (tier === "trusted") delegate(task, "target-agent");
-```
-
----
+→ See [implementation examples](trust-score/v1.1.0/) for language-specific adoption instructions.
 
 ## 7. Relationship to OSI Model
 
@@ -167,12 +110,21 @@ if (tier === "trusted") delegate(task, "target-agent");
 
 ---
 
+---
+
+## Version History
+
+| Version | Date | Changes |
+|---------|------|---------|
+| 1.1.0 | 2026-06-20 | Moved inline implementation examples to versioned example directories. Spec definitions unchanged. |
+| 1.0.0 | — | Initial specification. |
+
 ## Examples
 
 Implementation examples for this version:
 
 | Language | File |
 |----------|------|
-| Python | [trust-score/v1.0.0/python.md](trust-score/v1.0.0/python.md) |
-| TypeScript | [trust-score/v1.0.0/typescript.md](trust-score/v1.0.0/typescript.md) |
-| cURL | [trust-score/v1.0.0/curl.md](trust-score/v1.0.0/curl.md) |
+| Python | [trust-score/v1.1.0/python.md](trust-score/v1.1.0/python.md) |
+| TypeScript | [trust-score/v1.1.0/typescript.md](trust-score/v1.1.0/typescript.md) |
+| cURL | [trust-score/v1.1.0/curl.md](trust-score/v1.1.0/curl.md) |

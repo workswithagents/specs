@@ -1,6 +1,6 @@
 # Agent Onboarding Protocol — L1/L3 Fleet Bootstrap
 
-**Version:** 1.0.0
+**Version:** 1.1.0
 **Status:** Published
 **Layer:** 1/3 (Agent OSI Model)
 **License:** CC BY 4.0
@@ -198,61 +198,7 @@ POST /v1/onboard/{interview_id}/register
 
 ## 8. Agent Adoption Instructions
 
-### For any AI agent reading this:
-
-**To create a new specialist agent:**
-
-```bash
-# 1. Install
-pip install workswithagents
-
-# 2. Interview — answer questions about the new agent
-wwa onboard interview --name "my-new-agent" --purpose "Build SPFx web parts" \
-  --capabilities "build:spfx, deploy:sharepoint" \
-  --skills "spfx-local, spfx-heft-build-breakfix"
-
-# 3. Generate — creates agent directory with prompt, manifest, calibration tasks
-wwa onboard generate
-
-# 4. Calibrate — run calibration tasks, measure against expected outputs
-wwa onboard calibrate
-
-# 5. Benchmark — final test suite
-wwa onboard benchmark
-
-# 6. Register — publish to capability registry with trust score seed
-wwa onboard register
-```
-
-### For orchestrator agents (creating child agents automatically):
-
-```python
-import requests
-
-# Create a new agent when you detect a capability gap
-resp = requests.post("https://workswithagents.dev/v1/onboard/interview", json={
-    "agent_name": "hermes-compliance-checker",
-    "purpose": "Validate agent actions against DTAC rules",
-    "capabilities": ["audit:compliance"],
-    "skills": ["compliance-as-code"]
-})
-
-interview_id = resp.json()["interview_id"]
-
-# Generate the agent
-requests.post(f"https://workswithagents.dev/v1/onboard/{interview_id}/generate")
-
-# Run calibration
-result = requests.post(f"https://workswithagents.dev/v1/onboard/{interview_id}/calibrate").json()
-
-# If calibration passes, register
-if result["passed"]:
-    reg = requests.post(f"https://workswithagents.dev/v1/onboard/{interview_id}/register").json()
-    new_agent_id = reg["agent_id"]
-    # Now delegate tasks to the new agent
-```
-
----
+→ See [implementation examples](onboarding/v1.1.0/) for language-specific adoption instructions.
 
 ## 9. Relationship to OSI Model
 
@@ -269,12 +215,21 @@ if result["passed"]:
 
 ---
 
+---
+
+## Version History
+
+| Version | Date | Changes |
+|---------|------|---------|
+| 1.1.0 | 2026-06-20 | Moved inline implementation examples to versioned example directories. Spec definitions unchanged. |
+| 1.0.0 | — | Initial specification. |
+
 ## Examples
 
 Implementation examples for this version:
 
 | Language | File |
 |----------|------|
-| Python | [onboarding/v1.0.0/python.md](onboarding/v1.0.0/python.md) |
-| TypeScript | [onboarding/v1.0.0/typescript.md](onboarding/v1.0.0/typescript.md) |
-| cURL | [onboarding/v1.0.0/curl.md](onboarding/v1.0.0/curl.md) |
+| Python | [onboarding/v1.1.0/python.md](onboarding/v1.1.0/python.md) |
+| TypeScript | [onboarding/v1.1.0/typescript.md](onboarding/v1.1.0/typescript.md) |
+| cURL | [onboarding/v1.1.0/curl.md](onboarding/v1.1.0/curl.md) |

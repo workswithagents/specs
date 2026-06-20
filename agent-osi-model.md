@@ -1,6 +1,6 @@
 # The Agent OSI Model — A Layered Architecture for AI Agent Infrastructure
 
-**Version:** 1.0.0
+**Version:** 1.1.0
 **Status:** Published
 **Author:** Works With Agents (Vilius Vystartas)
 **License:** CC BY 4.0 — Free to use, cite, and build upon. Attribution required.
@@ -277,7 +277,7 @@ This model helps identify where standards are needed. Each layer that lacks a st
 This model is available as structured YAML for agent consumption:
 
 ```yaml
-agent_osi_version: "1.0.0"
+agent_osi_version: "1.1.0"
 layers:
   - id: 1
     name: "Execution"
@@ -346,12 +346,21 @@ This document is published under CC BY 4.0. Cite as:
 
 ---
 
+---
+
+## Version History
+
+| Version | Date | Changes |
+|---------|------|---------|
+| 1.1.0 | 2026-06-20 | Moved inline implementation examples to versioned example directories. Spec definitions unchanged. |
+| 1.0.0 | — | Initial specification. |
+
 ## Examples
 
 Implementation examples for this version:
 
 | Language | File |
 |----------|------|
-| Python | [agent-osi-model/v1.0.0/python.md](agent-osi-model/v1.0.0/python.md) |
-| TypeScript | [agent-osi-model/v1.0.0/typescript.md](agent-osi-model/v1.0.0/typescript.md) |
-| cURL | [agent-osi-model/v1.0.0/curl.md](agent-osi-model/v1.0.0/curl.md) |
+| Python | [agent-osi-model/v1.1.0/python.md](agent-osi-model/v1.1.0/python.md) |
+| TypeScript | [agent-osi-model/v1.1.0/typescript.md](agent-osi-model/v1.1.0/typescript.md) |
+| cURL | [agent-osi-model/v1.1.0/curl.md](agent-osi-model/v1.1.0/curl.md) |

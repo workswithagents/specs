@@ -1,6 +1,6 @@
 # AI Gateway / Policy Enforcement Point — Cross-Layer Governance
 
-**Version:** 1.0.0
+**Version:** 1.1.0
 **Status:** Published
 **Layer:** Cross-layer (L5-L7) — Agent OSI Model
 **License:** CC BY 4.0
@@ -376,65 +376,7 @@ Local sidecar for performance (cached policies, low latency), central gateway fo
 
 ## 12. Agent Adoption Instructions
 
-### Step 1: Route through the gateway
-
-```python
-import requests
-
-def call_model_via_gateway(agent_id, model, prompt, delegation_chain):
-    """Make an authorised model call through the AI Gateway."""
-    response = requests.post(
-        "https://gateway.internal/v1/gateway/evaluate",
-        json={
-            "agent_id": agent_id,
-            "intent": "model_inference",
-            "target": f"model:{model}",
-            "context": {"tokens": len(prompt)},
-            "delegation_chain": delegation_chain,
-            "signature": sign_message(...)
-        }
-    )
-    data = response.json()
-    if data["decision"] == "deny":
-        raise PermissionError(f"Gateway denied: {data['reason']}")
-
-    # Gateway approved — proceed to model
-    return call_model_directly(model, prompt)
-```
-
-### Step 2: Handle denials gracefully
-
-```python
-def safe_call(agent_id, intent, target, context):
-    response = gateway_evaluate(agent_id, intent, target, context)
-    if response["decision"] == "deny":
-        if "rate limit" in response.get("reason", "").lower():
-            wait_until = response.get("retry_after")
-            logger.info(f"Rate limited until {wait_until}, backing off")
-            return None, "rate_limited"
-        elif "permission" in response.get("reason", "").lower():
-            logger.warning(f"Permission denied: {response['reason']}")
-            return None, "denied"
-        else:
-            logger.error(f"Unexpected denial: {response['reason']}")
-            return None, "error"
-    return execute(intent, target, context), "allowed"
-```
-
-### Step 3: Verify gateway is active
-
-```bash
-# Check gateway health and policy stats
-curl -s https://gateway.internal/v1/gateway/health | jq
-{
-  "status": "healthy",
-  "policies_loaded": 12,
-  "agents_registered": 8,
-  "denied_24h": 44
-}
-```
-
----
+→ See [implementation examples](ai-gateway/v1.1.0/) for language-specific adoption instructions.
 
 ## 13. Standards Alignment
 
@@ -451,13 +393,22 @@ curl -s https://gateway.internal/v1/gateway/health | jq
 
 ---
 
+---
+
+## Version History
+
+| Version | Date | Changes |
+|---------|------|---------|
+| 1.1.0 | 2026-06-20 | Moved inline implementation examples to versioned example directories. Spec definitions unchanged. |
+| 1.0.0 | — | Initial specification. |
+
 ## Examples
 
 Implementation examples for this version:
 
 | Language | File |
 |----------|------|
-| Python | [ai-gateway/v1.0.0/python.md](ai-gateway/v1.0.0/python.md) |
-| TypeScript | [ai-gateway/v1.0.0/typescript.md](ai-gateway/v1.0.0/typescript.md) |
-| cURL | [ai-gateway/v1.0.0/curl.md](ai-gateway/v1.0.0/curl.md) |
+| Python | [ai-gateway/v1.1.0/python.md](ai-gateway/v1.1.0/python.md) |
+| TypeScript | [ai-gateway/v1.1.0/typescript.md](ai-gateway/v1.1.0/typescript.md) |
+| cURL | [ai-gateway/v1.1.0/curl.md](ai-gateway/v1.1.0/curl.md) |
 
