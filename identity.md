@@ -201,4 +201,16 @@ curl -X POST https://workswithagents.dev/v1/identity/verify \
 
 ---
 
+## Examples
+
+Implementation examples for this version:
+
+| Language | File |
+|----------|------|
+| Python | [identity/v1.0.0/python.md](identity/v1.0.0/python.md) |
+| TypeScript | [identity/v1.0.0/typescript.md](identity/v1.0.0/typescript.md) |
+| cURL | [identity/v1.0.0/curl.md](identity/v1.0.0/curl.md) |
+
+---
+
 *CC BY 4.0. Free to implement. Attribution required.*
