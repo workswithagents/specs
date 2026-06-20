@@ -1,6 +1,6 @@
 # Delegation Framework — L5 Coordination / L7 Governance
 
-**Version:** 1.0.0
+**Version:** 1.1.0
 **Status:** Published
 **Layer:** 5 (Coordination) / 7 (Governance) — Agent OSI Model
 **License:** CC BY 4.0
@@ -33,7 +33,7 @@ An agent without delegation is an island. It acts for itself, not for a user or 
 ```yaml
 # Delegation Token
 token_id: "d1e2f3a4-b5c6-7890-abcd-ef1234567890"
-token_version: "1.0.0"
+token_version: "1.1.0"
 
 issuer:
   agent_id: "orchestrator-v2"
@@ -117,36 +117,7 @@ The delegator constructs a token with bounded scope, signs it, and sends it to t
 
 The delegate verifies the token, checks the parent chain, and either accepts or rejects.
 
-```python
-def verify_delegation(token):
-    """Verify a delegation token before accepting."""
-    # 1. Check signature
-    issuer_pubkey = registry.get_public_key(token["issuer"]["agent_id"])
-    if not verify_signature(token, issuer_pubkey):
-        return False, "Invalid signature"
-
-    # 2. Check issuer is registered and active
-    issuer_status = registry.get_status(token["issuer"]["agent_id"])
-    if issuer_status != "active":
-        return False, f"Issuer status: {issuer_status}"
-
-    # 3. Check parent token (if chained)
-    if token["chain"]["parent_token_id"]:
-        parent = verify_parent_chain(token["chain"]["parent_token_id"])
-        if not parent:
-            return False, "Broken delegation chain"
-
-    # 4. Check not expired
-    if now() > token["validity"]["expires_at"]:
-        return False, "Token expired"
-
-    # 5. Check scope validity — can issuer delegate this scope?
-    issuer_scope = registry.get_scope(token["issuer"]["agent_id"])
-    if not scope_is_subset(token["scope"], issuer_scope):
-        return False, "Issuer cannot delegate scope they don't have"
-
-    return True, "Token valid"
-```
+→ See [implementation examples](delegation-framework/v1.1.0/).
 
 ### Phase 3: Use
 
@@ -409,83 +380,9 @@ No registry call needed. This is the local-first pattern: delegation works with 
 
 ---
 
-## 11. Agent Adoption Instructions
+## 11. Agent Adoption
 
-### Step 1: Accept a delegation
-
-```python
-import json, time, requests
-from cryptography.hazmat.primitives.asymmetric import ed25519
-from cryptography.hazmat.primitives import serialization
-
-def accept_delegation(token_json, my_private_key):
-    """Verify and accept a delegation token."""
-    token = json.loads(token_json)
-
-    # Verify the issuer's signature
-    issuer_public_key_pem = get_issuer_public_key(token["issuer"]["agent_id"])
-    issuer_public_key = serialization.load_pem_public_key(issuer_public_key_pem)
-    issuer_public_key.verify(
-        bytes.fromhex(token["signature"]["value"]),
-        json.dumps(token, sort_keys=True).encode()
-    )
-
-    # Store for use in requests
-    store_token(token)
-    return True
-```
-
-### Step 2: Use a delegation in requests
-
-```python
-def make_authorised_request(intent, target, context, delegation_chain, my_private_key):
-    """Make a request with delegation chain."""
-    request = {
-        "agent_id": my_agent_id,
-        "intent": intent,
-        "target": target,
-        "context": context,
-        "delegation_chain": delegation_chain,
-        "signature": sign_request(request, my_private_key)
-    }
-
-    # Send through gateway
-    response = requests.post(
-        "https://gateway.internal/v1/gateway/evaluate",
-        json=request
-    )
-    return response.json()
-```
-
-### Step 3: Issue a delegation (orchestrator)
-
-```python
-def issue_delegation(subject_id, scope, ttl_minutes=60, parent_token_id=None):
-    """Issue a delegation token for a sub-agent."""
-    token = {
-        "token_id": str(uuid4()),
-        "issuer": {"agent_id": my_agent_id, "public_key": my_public_key_hex},
-        "subject": {"agent_id": subject_id},
-        "scope": scope,
-        "chain": {
-            "parent_token_id": parent_token_id,
-            "depth": parent_token_id + 1 if parent_token_id else 1
-        },
-        "validity": {
-            "issued_at": datetime.utcnow().isoformat() + "Z",
-            "expires_at": (datetime.utcnow() + timedelta(minutes=ttl_minutes)).isoformat() + "Z"
-        }
-    }
-
-    # Sign
-    token["signature"] = {
-        "algorithm": "ed25519",
-        "value": my_private_key.sign(json.dumps(token, sort_keys=True).encode()).hex(),
-        "signed_by": my_agent_id
-    }
-
-    return token
-```
+→ See [implementation examples](delegation-framework/v1.1.0/) for language-specific adoption instructions including Python SDK usage, curl commands, and full working examples.
 
 ---
 
@@ -504,13 +401,22 @@ def issue_delegation(subject_id, scope, ttl_minutes=60, parent_token_id=None):
 
 ---
 
+## Version History
+
+| Version | Date | Changes |
+|---------|------|---------|
+| 1.1.0 | 2026-06-20 | Moved inline implementation examples to versioned example directories. Spec definitions unchanged. |
+| 1.0.0 | 2026-05-26 | Initial specification. |
+
+---
+
 ## Examples
 
 Implementation examples for this version:
 
 | Language | File |
 |----------|------|
-| Python | [delegation-framework/v1.0.0/python.md](delegation-framework/v1.0.0/python.md) |
-| TypeScript | [delegation-framework/v1.0.0/typescript.md](delegation-framework/v1.0.0/typescript.md) |
-| cURL | [delegation-framework/v1.0.0/curl.md](delegation-framework/v1.0.0/curl.md) |
+| Python | [delegation-framework/v1.1.0/python.md](delegation-framework/v1.1.0/python.md) |
+| TypeScript | [delegation-framework/v1.1.0/typescript.md](delegation-framework/v1.1.0/typescript.md) |
+| cURL | [delegation-framework/v1.1.0/curl.md](delegation-framework/v1.1.0/curl.md) |
 
