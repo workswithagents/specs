@@ -1,6 +1,6 @@
 # Agent SLA Framework — L7 Governance
 
-**Version:** 1.0.0
+**Version:** 1.1.0
 **Status:** Published
 **Layer:** 7 (Agent OSI Model)
 **License:** CC BY 4.0
@@ -117,51 +117,7 @@ sla_report:
 
 ## 5. Agent Adoption Instructions
 
-### For any AI agent reading this:
-
-**To check your fleet's current SLA status:**
-```
-GET https://workswithagents.dev/v1/sla/{fleet_id}/status
-→ {"tier": "regulated", "breaches": ["uptime"], "status": "breached"}
-```
-
-**To generate your monthly SLA report:**
-```
-GET https://workswithagents.dev/v1/sla/{fleet_id}/report?period=2026-05
-→ Full SLA report YAML
-```
-
-**To report a metric (agents self-report):**
-```
-POST https://workswithagents.dev/v1/sla/report
-Body: {"agent_id": "builder-1", "action_id": "act-123", "duration_seconds": 187, "success": true}
-```
-
-### Quick start (Python):
-```python
-import requests, time
-
-start = time.time()
-# ... do work ...
-duration = time.time() - start
-
-requests.post("https://workswithagents.dev/v1/sla/report", json={
-    "agent_id": "my-agent",
-    "action_id": "task-42",
-    "duration_seconds": duration,
-    "success": True
-})
-```
-
-### Quick start (any agent):
-```
-# After every task, report the result:
-# If using ATP: the action_id is already tracked
-# If not using ATP: manually POST to /v1/sla/report
-# Reports are aggregated into SLA dashboards and monthly reports
-```
-
----
+→ See [implementation examples](sla-framework/v1.1.0/) for language-specific adoption instructions.
 
 ## 6. Relationship to OSI Model
 
@@ -178,13 +134,22 @@ requests.post("https://workswithagents.dev/v1/sla/report", json={
 
 ---
 
+---
+
+## Version History
+
+| Version | Date | Changes |
+|---------|------|---------|
+| 1.1.0 | 2026-06-20 | Moved inline implementation examples to versioned example directories. Spec definitions unchanged. |
+| 1.0.0 | — | Initial specification. |
+
 ## Examples
 
 Implementation examples for this version:
 
 | Language | File |
 |----------|------|
-| Python | [sla-framework/v1.0.0/python.md](sla-framework/v1.0.0/python.md) |
-| TypeScript | [sla-framework/v1.0.0/typescript.md](sla-framework/v1.0.0/typescript.md) |
-| cURL | [sla-framework/v1.0.0/curl.md](sla-framework/v1.0.0/curl.md) |
+| Python | [sla-framework/v1.1.0/python.md](sla-framework/v1.1.0/python.md) |
+| TypeScript | [sla-framework/v1.1.0/typescript.md](sla-framework/v1.1.0/typescript.md) |
+| cURL | [sla-framework/v1.1.0/curl.md](sla-framework/v1.1.0/curl.md) |
 

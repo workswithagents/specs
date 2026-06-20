@@ -1,7 +1,7 @@
 # Agent Payments Protocol (AP2) — Payment Mandate
 
 **Status:** Published
-**Version:** 0.9.0
+**Version:** 1.0.0
 **Layer:** L7 (Agent OSI Model — Governance)
 **License:** CC BY 4.0
 **Supersedes:** Agent Economics Protocol §3.2 (spending authority)
@@ -107,26 +107,7 @@ The enforcement middleware SHOULD:
    e. If cost > threshold, emit `human_approval_required` event with mandate + tool details.
 4. Log every approved and rejected spend to an audit trail (`spend_log`).
 
-```python
-# Reference enforcement pseudocode
-def pre_tool_spend_check(tool_name: str, args: dict, cost: float) -> dict:
-    mandate = load_mandate()
-    if datetime.now() > mandate.expires_at:
-        return {"action": "block", "message": "Mandate expired."}
-    
-    tracker = SpendTracker(mandate.mandate_id)
-    if tracker.total_spent + cost > mandate.total_budget:
-        return {"action": "block", "message": "Total budget exceeded."}
-    if cost > mandate.per_transaction_max:
-        return {"action": "block", "message": "Per-transaction cap exceeded."}
-    
-    if cost <= mandate.auto_approve_up_to:
-        tracker.log_spend(tool_name, cost, approved=True)
-        return {"action": "allow"}
-    
-    tracker.log_spend(tool_name, cost, approved=False, reason="needs_human")
-    return {"action": "block", "message": f"Cost ${cost:.2f} exceeds auto-approval threshold. Waiting for human signature."}
-```
+→ See [implementation examples](ap2-mandate/v1.0.0/) for the complete enforcement middleware implementation and pseudocode.
 
 ## 6. Human-in-the-Loop Signature Flow
 
@@ -186,13 +167,22 @@ spend_log:
 
 ---
 
+---
+
+## Version History
+
+| Version | Date | Changes |
+|---------|------|---------|
+| 1.0.0 | 2026-06-20 | Moved inline implementation examples to versioned example directories. Spec definitions unchanged. |
+| 0.9.0 | — | Initial specification. |
+
 ## Examples
 
 Implementation examples for this version:
 
 | Language | File |
 |----------|------|
-| Python | [ap2-mandate/v0.9.0/python.md](ap2-mandate/v0.9.0/python.md) |
-| TypeScript | [ap2-mandate/v0.9.0/typescript.md](ap2-mandate/v0.9.0/typescript.md) |
-| cURL | [ap2-mandate/v0.9.0/curl.md](ap2-mandate/v0.9.0/curl.md) |
+| Python | [ap2-mandate/v1.0.0/python.md](ap2-mandate/v1.0.0/python.md) |
+| TypeScript | [ap2-mandate/v1.0.0/typescript.md](ap2-mandate/v1.0.0/typescript.md) |
+| cURL | [ap2-mandate/v1.0.0/curl.md](ap2-mandate/v1.0.0/curl.md) |
 

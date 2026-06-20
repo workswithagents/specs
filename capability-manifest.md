@@ -1,6 +1,6 @@
 # Agent Capability Manifest — Layer 3 Discovery
 
-**Version:** 1.0.0
+**Version:** 1.1.0
 **Status:** Published
 **Layer:** 3 — Discovery (Agent OSI Model)
 **License:** CC BY 4.0
@@ -227,12 +227,21 @@ trust_score = 0.30 × success_rate
 
 ---
 
+---
+
+## Version History
+
+| Version | Date | Changes |
+|---------|------|---------|
+| 1.1.0 | 2026-06-20 | Moved inline implementation examples to versioned example directories. Spec definitions unchanged. |
+| 1.0.0 | — | Initial specification. |
+
 ## Examples
 
 Implementation examples for this version:
 
 | Language | File |
 |----------|------|
-| Python | [capability-manifest/v1.0.0/python.md](capability-manifest/v1.0.0/python.md) |
-| TypeScript | [capability-manifest/v1.0.0/typescript.md](capability-manifest/v1.0.0/typescript.md) |
-| cURL | [capability-manifest/v1.0.0/curl.md](capability-manifest/v1.0.0/curl.md) |
+| Python | [capability-manifest/v1.1.0/python.md](capability-manifest/v1.1.0/python.md) |
+| TypeScript | [capability-manifest/v1.1.0/typescript.md](capability-manifest/v1.1.0/typescript.md) |
+| cURL | [capability-manifest/v1.1.0/curl.md](capability-manifest/v1.1.0/curl.md) |

@@ -1,6 +1,6 @@
 # IACP Fault Tolerance — Dead-Letter & Rollback Protocol
 
-**Version:** 1.0.0  
+**Version:** 1.1.0  
 **Status:** Draft  
 **Layer:** 5 (Coordination) / 4 (Session)  
 **License:** CC BY 4.0  
@@ -132,46 +132,7 @@ When an agent detects an abandoned handoff (via timeout or rejection), it MUST e
 5. **NOTIFY** — Emit a dead-letter error frame with `ERR_HANDOFF_TIMEOUT` or `ERR_STATE_REJECTION` to the session audit log.
 6. **RESUME** — Optionally re-initiate the handoff from the checkpoint step with `IACP_HANDOFF`.
 
-### 3.2 Pseudocode
-
-```python
-def rollback_on_timeout(session_id, checkpoint_store, divergence_step):
-    # 1. Freeze
-    session_store.freeze(session_id)
-    
-    # 2. Find checkpoint
-    checkpoint = checkpoint_store.find_nearest_before(
-        session_id=session_id,
-        step=divergence_step
-    )
-    if not checkpoint:
-        raise CheckpointUnavailable(
-            requested_step=divergence_step,
-            oldest=checkpoint_store.oldest_step(session_id),
-            latest=checkpoint_store.latest_step(session_id)
-        )
-    
-    # 3. Verify checkpoint integrity
-    actual_hash = sha256(json.dumps(checkpoint.state))
-    if actual_hash != checkpoint.state_hash:
-        raise StateIntegrityError(
-            f"Checkpoint at step {checkpoint.step} has been tampered with"
-        )
-    
-    # 4. Restore
-    session_store.restore(session_id, checkpoint.state)
-    
-    # 5. Notify dead-letter
-    emit_error_frame(
-        code="ERR_HANDOFF_TIMEOUT",
-        session_id=session_id,
-        handoff_ref=checkpoint.metadata.handoff_ref,
-        last_known_state_hash=checkpoint.state_hash,
-    )
-    
-    # 6. Resume from checkpoint
-    return initiate_handoff(session_id, from_step=checkpoint.step)
-```
+→ See [implementation examples](iacp-fault-tolerance/v1.1.0/) for the complete rollback implementation and usage examples.
 
 ---
 
@@ -271,13 +232,22 @@ Agent A                          Agent B
 
 ---
 
+---
+
+## Version History
+
+| Version | Date | Changes |
+|---------|------|---------|
+| 1.1.0 | 2026-06-20 | Moved inline implementation examples to versioned example directories. Spec definitions unchanged. |
+| 1.0.0 | — | Initial specification. |
+
 ## Examples
 
 Implementation examples for this version:
 
 | Language | File |
 |----------|------|
-| Python | [iacp-fault-tolerance/v1.0.0/python.md](iacp-fault-tolerance/v1.0.0/python.md) |
-| TypeScript | [iacp-fault-tolerance/v1.0.0/typescript.md](iacp-fault-tolerance/v1.0.0/typescript.md) |
-| cURL | [iacp-fault-tolerance/v1.0.0/curl.md](iacp-fault-tolerance/v1.0.0/curl.md) |
+| Python | [iacp-fault-tolerance/v1.1.0/python.md](iacp-fault-tolerance/v1.1.0/python.md) |
+| TypeScript | [iacp-fault-tolerance/v1.1.0/typescript.md](iacp-fault-tolerance/v1.1.0/typescript.md) |
+| cURL | [iacp-fault-tolerance/v1.1.0/curl.md](iacp-fault-tolerance/v1.1.0/curl.md) |
 

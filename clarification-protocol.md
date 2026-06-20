@@ -1,6 +1,6 @@
 # Agent Clarification Protocol — Layer 4
 
-**Version:** 1.0.0
+**Version:** 1.1.0
 **Status:** Published
 **Layer:** 4 — Session (Agent OSI Model)
 **License:** CC BY 4.0
@@ -162,13 +162,22 @@ All WWA compliance tools MUST implement this protocol:
 
 ---
 
+---
+
+## Version History
+
+| Version | Date | Changes |
+|---------|------|---------|
+| 1.1.0 | 2026-06-20 | Moved inline implementation examples to versioned example directories. Spec definitions unchanged. |
+| 1.0.0 | — | Initial specification. |
+
 ## Examples
 
 Implementation examples for this version:
 
 | Language | File |
 |----------|------|
-| Python | [clarification-protocol/v1.0.0/python.md](clarification-protocol/v1.0.0/python.md) |
-| TypeScript | [clarification-protocol/v1.0.0/typescript.md](clarification-protocol/v1.0.0/typescript.md) |
-| cURL | [clarification-protocol/v1.0.0/curl.md](clarification-protocol/v1.0.0/curl.md) |
+| Python | [clarification-protocol/v1.1.0/python.md](clarification-protocol/v1.1.0/python.md) |
+| TypeScript | [clarification-protocol/v1.1.0/typescript.md](clarification-protocol/v1.1.0/typescript.md) |
+| cURL | [clarification-protocol/v1.1.0/curl.md](clarification-protocol/v1.1.0/curl.md) |
 

@@ -1,6 +1,6 @@
 # Agent Deployment Manifest — Cross-Layer Fleet Definition
 
-**Version:** 1.0.0
+**Version:** 1.1.0
 **Status:** Published
 **Layer:** Cross-layer (Agent OSI Model)
 **License:** CC BY 4.0
@@ -120,67 +120,12 @@ fleet:
 
 ---
 
-## 4. Deploy Command
+→ See [implementation examples](deployment-manifest/v1.1.0/) for deploy commands and fleet management.
 
-```bash
-# Deploy the fleet
-wwa fleet deploy fleet.yaml
-
-# Check status
-wwa fleet status
-
-# Scale an agent type
-wwa fleet scale builder --count 5
-
-# View trust scores
-wwa fleet trust
-
-# Pause/resume
-wwa fleet pause researcher
-wwa fleet resume researcher
-```
-
----
 
 ## 5. Agent Adoption Instructions
 
-### For any AI agent reading this:
-
-**To join a fleet (register yourself):**
-```
-POST https://workswithagents.dev/v1/agents/register
-Body: Your Capability Manifest
-→ You're now discoverable by the fleet coordinator
-```
-
-**To read your fleet manifest (understand your role):**
-```
-GET https://workswithagents.dev/v1/fleets/{fleet_id}/manifest
-→ Returns the full manifest. Read your agent entry to understand your role.
-```
-
-**To deploy a fleet from manifest:**
-```bash
-pip install workswithagents
-wwa fleet deploy fleet.yaml
-```
-
-### Quick start — register as a worker:
-```python
-import requests
-
-manifest = {
-    "manifest_version": "1.0.0-draft",
-    "agent_id": "my-agent-name",
-    "capabilities": [
-        {"action": "build", "target": "spfx", "success_rate": 0.94}
-    ]
-}
-requests.post("https://workswithagents.dev/v1/agents/register", json=manifest)
-# Now you're discoverable. The coordinator will find you.
-```
-
----
+→ See [implementation examples](deployment-manifest/v1.1.0/) for language-specific adoption instructions.
 
 ## 6. Relationship to OSI Model
 
@@ -202,13 +147,22 @@ A Deployment Manifest touches all layers:
 
 ---
 
+---
+
+## Version History
+
+| Version | Date | Changes |
+|---------|------|---------|
+| 1.1.0 | 2026-06-20 | Moved inline implementation examples to versioned example directories. Spec definitions unchanged. |
+| 1.0.0 | — | Initial specification. |
+
 ## Examples
 
 Implementation examples for this version:
 
 | Language | File |
 |----------|------|
-| Python | [deployment-manifest/v1.0.0/python.md](deployment-manifest/v1.0.0/python.md) |
-| TypeScript | [deployment-manifest/v1.0.0/typescript.md](deployment-manifest/v1.0.0/typescript.md) |
-| cURL | [deployment-manifest/v1.0.0/curl.md](deployment-manifest/v1.0.0/curl.md) |
+| Python | [deployment-manifest/v1.1.0/python.md](deployment-manifest/v1.1.0/python.md) |
+| TypeScript | [deployment-manifest/v1.1.0/typescript.md](deployment-manifest/v1.1.0/typescript.md) |
+| cURL | [deployment-manifest/v1.1.0/curl.md](deployment-manifest/v1.1.0/curl.md) |
 

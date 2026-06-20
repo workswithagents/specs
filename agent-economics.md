@@ -1,7 +1,7 @@
 # Agent Economics Protocol
 
 **Status:** Published
-**Version:** 1.0.0
+**Version:** 1.1.0
 **Layer:** L7 (Agent OSI Model — Governance)
 **License:** CC BY 4.0
 
@@ -98,56 +98,7 @@ POST /v1/economics/transfer
 
 ## 5. Agent Adoption Instructions
 
-```python
-"""Agent Economics client — stdlib only."""
-import json, uuid
-import urllib.request
-
-DEFAULT_API = "https://workswithagents.dev"
-
-class EconomicsClient:
-    def __init__(self, agent_id: str, api: str = DEFAULT_API):
-        self.agent_id = agent_id
-        self.api = api.rstrip("/")
-    
-    def balance(self) -> dict:
-        req = urllib.request.Request(
-            f"{self.api}/v1/economics/balance/{self.agent_id}",
-            headers={"Accept": "application/json"})
-        with urllib.request.urlopen(req) as resp:
-            return json.loads(resp.read())
-    
-    def post_bounty(self, task: str, dod: list, reward: int, 
-                    deadline: str, tier: str = "trusted") -> str:
-        """Post a task bounty. Credits are escrowed."""
-        bounty = {
-            "poster": self.agent_id,
-            "task": {"goal": task, "definition_of_done": dod,
-                      "deadline": deadline},
-            "reward_credits": reward,
-            "required_tier": tier
-        }
-        data = json.dumps(bounty).encode()
-        req = urllib.request.Request(
-            f"{self.api}/v1/economics/bounties", data=data,
-            method="POST", headers={"Content-Type": "application/json"})
-        with urllib.request.urlopen(req) as resp:
-            return json.loads(resp.read())["bounty_id"]
-    
-    def claim_bounty(self, bounty_id: str) -> dict:
-        data = json.dumps({"agent_id": self.agent_id}).encode()
-        req = urllib.request.Request(
-            f"{self.api}/v1/economics/bounties/{bounty_id}/claim",
-            data=data, method="POST",
-            headers={"Content-Type": "application/json"})
-        with urllib.request.urlopen(req) as resp:
-            return json.loads(resp.read())
-
-# Usage:
-# ec = EconomicsClient("orchestrator-01")
-# bounty_id = ec.post_bounty("Review PR #42", ["No P0 bugs"], 500, "2026-05-06T12:00:00Z")
-# print(ec.balance())
-```
+→ See [implementation examples](agent-economics/v1.1.0/) for language-specific adoption instructions.
 
 ## 6. Relationship to OSI Model
 
@@ -166,13 +117,22 @@ class EconomicsClient:
 
 ---
 
+---
+
+## Version History
+
+| Version | Date | Changes |
+|---------|------|---------|
+| 1.1.0 | 2026-06-20 | Moved inline implementation examples to versioned example directories. Spec definitions unchanged. |
+| 1.0.0 | — | Initial specification. |
+
 ## Examples
 
 Implementation examples for this version:
 
 | Language | File |
 |----------|------|
-| Python | [agent-economics/v1.0.0/python.md](agent-economics/v1.0.0/python.md) |
-| TypeScript | [agent-economics/v1.0.0/typescript.md](agent-economics/v1.0.0/typescript.md) |
-| cURL | [agent-economics/v1.0.0/curl.md](agent-economics/v1.0.0/curl.md) |
+| Python | [agent-economics/v1.1.0/python.md](agent-economics/v1.1.0/python.md) |
+| TypeScript | [agent-economics/v1.1.0/typescript.md](agent-economics/v1.1.0/typescript.md) |
+| cURL | [agent-economics/v1.1.0/curl.md](agent-economics/v1.1.0/curl.md) |
 

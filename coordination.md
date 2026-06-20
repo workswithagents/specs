@@ -1,6 +1,6 @@
 # Agent Coordination Protocol (ACP) — Layer 5
 
-**Version:** 1.0.0
+**Version:** 1.1.0
 **Status:** Published
 **Layer:** 5 — Coordination (Agent OSI Model)
 **License:** CC BY 4.0
@@ -299,13 +299,22 @@ Recommended: SQLite+WAL for local fleets, FactBase API for distributed fleets.
 
 ---
 
+---
+
+## Version History
+
+| Version | Date | Changes |
+|---------|------|---------|
+| 1.1.0 | 2026-06-20 | Moved inline implementation examples to versioned example directories. Spec definitions unchanged. |
+| 1.0.0 | — | Initial specification. |
+
 ## Examples
 
 Implementation examples for this version:
 
 | Language | File |
 |----------|------|
-| Python | [coordination/v1.0.0/python.md](coordination/v1.0.0/python.md) |
-| TypeScript | [coordination/v1.0.0/typescript.md](coordination/v1.0.0/typescript.md) |
-| cURL | [coordination/v1.0.0/curl.md](coordination/v1.0.0/curl.md) |
+| Python | [coordination/v1.1.0/python.md](coordination/v1.1.0/python.md) |
+| TypeScript | [coordination/v1.1.0/typescript.md](coordination/v1.1.0/typescript.md) |
+| cURL | [coordination/v1.1.0/curl.md](coordination/v1.1.0/curl.md) |
 

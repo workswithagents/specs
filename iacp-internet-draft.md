@@ -455,7 +455,7 @@ the choice of UUIDv7 for message ordering.
 
 RFC Editor: Remove this section before publication.
 
-- **draft-vystartas-iacp-00** (2026-05-06): Initial version.
+- **draft-vystartas-iacp-00** (2026-05-06): Initial version. Moved inline implementation examples to versioned example directories (2026-06-20).
 
 ---
 

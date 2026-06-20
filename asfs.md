@@ -1,6 +1,6 @@
 # ASFS — Agent Skill Format Standard
 
-**Version:** 1.0.0
+**Version:** 1.1.0
 **Status:** Published
 **Layer:** Cross-layer (L3 Discovery + L5 Coordination)
 **License:** CC BY 4.0
@@ -61,70 +61,11 @@ How an agent confirms the skill was applied correctly.
 
 Hermes skills are a superset of ASFS. The converter strips Hermes-specific frontmatter and preserves the core format.
 
-### Python converter (stdlib only)
-
-```python
-"""ASFS ↔ Hermes skill converter. No dependencies."""
-import re, yaml  # yaml is optional — falls back to regex
-
-def hermes_to_asfs(skill_md: str) -> str:
-    """Convert a Hermes SKILL.md to ASFS format."""
-    # Strip Hermes-specific frontmatter fields
-    lines = skill_md.split("\n")
-    output = []
-    in_fm, fm_done = False, False
-    skip_keys = {"hermes", "metadata", "related_skills", "category", 
-                 "prerequisites", "author"}
-    
-    for line in lines:
-        if line.strip() == "---" and not fm_done:
-            in_fm, fm_done = True, True
-            output.append(line)
-            continue
-        if in_fm and line.strip() == "---":
-            in_fm = False
-            output.append(line)
-            continue
-        if in_fm:
-            key = line.split(":")[0].strip() if ":" in line else ""
-            if key in skip_keys:
-                continue
-        output.append(line)
-    
-    return "\n".join(output)
-
-# Usage:
-# with open("~/.hermes/skills/my-skill/SKILL.md") as f:
-#     asfs = hermes_to_asfs(f.read())
-# with open("my-skill.asfs.md", "w") as f:
-#     f.write(asfs)
-```
+→ See [implementation examples](asfs/v1.1.0/) for the Python ASFS-Hermes converter and usage examples.
 
 ## 5. Agent Adoption Instructions
 
-### For any AI agent reading this:
-```bash
-# Download a skill in ASFS format
-curl https://workswithagents.dev/v1/skills/my-skill > my-skill.asfs.md
-
-# Validate
-python3 -c "
-import frontmatter  # pip install python-frontmatter (optional)
-with open('my-skill.asfs.md') as f:
-    fm = frontmatter.load(f)
-    assert fm.get('name'), 'Missing name field'
-    assert fm.get('version'), 'Missing version field'
-"
-```
-
-### Skill discovery:
-```bash
-# List all ASFS skills available
-curl https://workswithagents.dev/v1/skills
-
-# Search by tag
-curl https://workswithagents.dev/v1/skills?tag=python
-```
+→ See [implementation examples](asfs/v1.1.0/) for language-specific adoption instructions.
 
 ## 6. Relationship to OSI Model
 
@@ -144,12 +85,21 @@ curl https://workswithagents.dev/v1/skills?tag=python
 
 ---
 
+---
+
+## Version History
+
+| Version | Date | Changes |
+|---------|------|---------|
+| 1.1.0 | 2026-06-20 | Moved inline implementation examples to versioned example directories. Spec definitions unchanged. |
+| 1.0.0 | — | Initial specification. |
+
 ## Examples
 
 Implementation examples for this version:
 
 | Language | File |
 |----------|------|
-| Python | [asfs/v1.0.0/python.md](asfs/v1.0.0/python.md) |
-| TypeScript | [asfs/v1.0.0/typescript.md](asfs/v1.0.0/typescript.md) |
-| cURL | [asfs/v1.0.0/curl.md](asfs/v1.0.0/curl.md) |
+| Python | [asfs/v1.1.0/python.md](asfs/v1.1.0/python.md) |
+| TypeScript | [asfs/v1.1.0/typescript.md](asfs/v1.1.0/typescript.md) |
+| cURL | [asfs/v1.1.0/curl.md](asfs/v1.1.0/curl.md) |

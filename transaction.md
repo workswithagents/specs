@@ -1,6 +1,6 @@
 # Agent Transaction Protocol (ATP) — Layer 7 Governance
 
-**Version:** 1.0.0
+**Version:** 1.1.0
 **Status:** Published
 **Layer:** 7 — Governance (Agent OSI Model)
 **License:** CC BY 4.0
@@ -112,7 +112,7 @@ Actions declare one of three guarantee levels:
 ## 6. Action Schema
 
 ```yaml
-atp_version: "1.0.0-draft"
+atp_version: "1.1.0-draft"
 action_id: "act-20260505-001"
 idempotency_key: "deploy-project-dashboard-v3"
 guarantee_level: "atp-2"        # atp-1 | atp-2 | atp-3
@@ -277,13 +277,22 @@ That's 200 lines of Python. Full protocol is 500 lines.
 
 ---
 
+---
+
+## Version History
+
+| Version | Date | Changes |
+|---------|------|---------|
+| 1.1.0 | 2026-06-20 | Moved inline implementation examples to versioned example directories. Spec definitions unchanged. |
+| 1.0.0 | — | Initial specification. |
+
 ## Examples
 
 Implementation examples for this version:
 
 | Language | File |
 |----------|------|
-| Python | [transaction/v1.0.0/python.md](transaction/v1.0.0/python.md) |
-| TypeScript | [transaction/v1.0.0/typescript.md](transaction/v1.0.0/typescript.md) |
-| cURL | [transaction/v1.0.0/curl.md](transaction/v1.0.0/curl.md) |
+| Python | [transaction/v1.1.0/python.md](transaction/v1.1.0/python.md) |
+| TypeScript | [transaction/v1.1.0/typescript.md](transaction/v1.1.0/typescript.md) |
+| cURL | [transaction/v1.1.0/curl.md](transaction/v1.1.0/curl.md) |
 
