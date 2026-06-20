@@ -266,3 +266,15 @@ if result["passed"]:
 ---
 
 *CC BY 4.0. Free to implement. Attribution required.*
+
+---
+
+## Examples
+
+Implementation examples for this version:
+
+| Language | File |
+|----------|------|
+| Python | [onboarding/v1.0.0/python.md](onboarding/v1.0.0/python.md) |
+| TypeScript | [onboarding/v1.0.0/typescript.md](onboarding/v1.0.0/typescript.md) |
+| cURL | [onboarding/v1.0.0/curl.md](onboarding/v1.0.0/curl.md) |
