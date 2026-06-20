@@ -1,0 +1,86 @@
+{
+  "$schema": "https://specs.workswithagents.dev/agent-flags-schema.json",
+  "title": "Agent Feature Flags Schema",
+  "version": "1.0.0",
+  "description": "Standard schema for dynamic agent feature flags. Agent fleets poll a single URL to discover which tools and capabilities are currently enabled, at what rollout percentage, and under what kill-switch conditions. No code deploys needed to toggle agent behaviour.",
+  "type": "object",
+  "required": ["flags", "generated_at"],
+  "properties": {
+    "flags": {
+      "type": "array",
+      "description": "List of feature flag definitions",
+      "items": {
+        "type": "object",
+        "required": ["tool_name", "enabled"],
+        "properties": {
+          "tool_name": {
+            "type": "string",
+            "description": "Name of the tool or capability this flag controls. Agents match against this value."
+          },
+          "enabled": {
+            "type": "boolean",
+            "description": "Global on/off switch. When false, the tool is disabled for all agents regardless of rollout."
+          },
+          "rollout_percentage": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 100,
+            "description": "Percentage of agent instances that should see this flag as enabled. 0 = off for all, 100 = on for all."
+          },
+          "kill_switch_condition": {
+            "type": "string",
+            "description": "Regex pattern. When matched against the agent's current context (e.g., model name, environment, error rate), the flag is forced to disabled. Example: 'gpt-4|o1-preview' would disable the flag for agents running those models."
+          },
+          "metadata": {
+            "type": "object",
+            "description": "Optional metadata for observability",
+            "properties": {
+              "owner": { "type": "string" },
+              "reason": { "type": "string" },
+              "ticket_url": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When this flag set was generated. Agents should cache and re-fetch after this."
+    },
+    "ttl_seconds": {
+      "type": "integer",
+      "default": 300,
+      "description": "Recommended cache TTL. Agents should not use flags older than this."
+    }
+  },
+  "examples": {
+    "production_flag_set": {
+      "generated_at": "2026-06-19T12:00:00Z",
+      "ttl_seconds": 300,
+      "flags": [
+        {
+          "tool_name": "code_review",
+          "enabled": true,
+          "rollout_percentage": 100,
+          "kill_switch_condition": "error_rate > 0.05",
+          "metadata": { "owner": "platform-team", "reason": "GA since v2.1" }
+        },
+        {
+          "tool_name": "auto_deploy",
+          "enabled": true,
+          "rollout_percentage": 25,
+          "kill_switch_condition": "model == 'deepseek-v3'|branch == 'dev'",
+          "metadata": { "owner": "infra-team", "reason": "Canary rollout" }
+        },
+        {
+          "tool_name": "agent_payments",
+          "enabled": false,
+          "rollout_percentage": 0,
+          "kill_switch_condition": "",
+          "metadata": { "owner": "product", "reason": "Waiting on AP2 mandate spec ratification" }
+        }
+      ]
+    }
+  }
+}

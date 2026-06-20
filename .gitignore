@@ -1,0 +1,10 @@
+# Hermes internal files
+.hermes/
+
+# macOS
+.DS_Store
+
+# Editor
+*.swp
+*.swo
+*~

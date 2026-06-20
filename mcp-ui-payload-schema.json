@@ -1,0 +1,133 @@
+{
+  "$schema": "https://specs.workswithagents.dev/mcp-ui-schema.json",
+  "title": "MCP Apps — UI Response Payload Schema",
+  "version": "0.1.0",
+  "description": "Extends MCP tool responses with optional ui_view metadata. When present, the host can render the result as an interactive or styled component instead of raw JSON. The host is never required to render views — plain text/JSON falls back cleanly.",
+  "definitions": {
+    "ui_view": {
+      "type": "object",
+      "description": "Optional UI rendering hint attached to any MCP tool result.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["table", "badge_list", "code_block", "metric_row", "status_dot", "progress_bar", "object_card"],
+          "description": "Visual component type the tool recommends."
+        },
+        "label": {
+          "type": "string",
+          "description": "Section heading rendered above the component."
+        },
+        "columns": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Column headers for table views."
+        },
+        "highlight": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Field names whose values should be visually emphasised (e.g. pass/fail, score, status)."
+        },
+        "badge_map": {
+          "type": "object",
+          "description": "Maps field values to badge colours for badge_list and status_dot views.",
+          "additionalProperties": { "type": "string" }
+        }
+      },
+      "required": ["type"]
+    },
+    "metric": {
+      "type": "object",
+      "properties": {
+        "label": { "type": "string" },
+        "value": { "type": "string" },
+        "unit": { "type": "string" },
+        "trend": { "type": "string", "enum": ["up", "down", "flat", null] }
+      },
+      "required": ["label", "value"]
+    },
+    "status_dot": {
+      "type": "object",
+      "properties": {
+        "label": { "type": "string" },
+        "status": { "type": "string", "enum": ["pass", "fail", "warn", "info", "unknown"] }
+      },
+      "required": ["label", "status"]
+    }
+  },
+  "examples": {
+    "fact_query_result_with_table": {
+      "result": {
+        "facts": [
+          {"entity": "python", "attribute": "version", "value": "3.11.5", "category": "env", "verified": 1},
+          {"entity": "node", "attribute": "version", "value": "22.22.3", "category": "env", "verified": 1}
+        ],
+        "count": 2
+      },
+      "_ui": {
+        "type": "table",
+        "label": "Environment Facts",
+        "columns": ["Entity", "Attribute", "Value", "Verified"],
+        "highlight": ["value"]
+      }
+    },
+    "pitfall_lookup_with_status": {
+      "result": {
+        "pitfalls": [
+          {"id": 1, "tool": "patch", "error": "escape-drift on double-quoted strings", "fix": "Use single quotes in old_string", "severity": "high"},
+          {"id": 2, "tool": "delegate_task", "error": "child timeout on long-form generation", "fix": "Use write_file directly", "severity": "medium"}
+        ],
+        "count": 2
+      },
+      "_ui": {
+        "type": "badge_list",
+        "label": "Known Pitfalls",
+        "highlight": ["severity"],
+        "badge_map": {
+          "high": "red",
+          "medium": "amber",
+          "low": "green"
+        }
+      }
+    },
+    "handoff_verify_with_metrics": {
+      "result": {
+        "signature_valid": true,
+        "signer": "did:key:z6Mk...",
+        "verified_at": "2026-06-19T12:00:00Z",
+        "checks": [
+          {"check": "Signature algorithm", "status": "pass"},
+          {"check": "Key revocation", "status": "pass"},
+          {"check": "Payload integrity", "status": "pass"},
+          {"check": "TTL expiry", "status": "pass"}
+        ]
+      },
+      "_ui": {
+        "type": "status_dot",
+        "label": "Handoff Verification",
+        "columns": ["Check", "Status"],
+        "highlight": ["status"],
+        "badge_map": {
+          "pass": "green",
+          "fail": "red",
+          "warn": "amber"
+        }
+      }
+    }
+  },
+  "integration_note": {
+    "how_it_works": "The host inspects each MCP tool response for a top-level `_ui` key. If present, the host renders the `result` through the specified component type. If absent or if the host doesn't support UI payloads, the `result` field is displayed as plain JSON. Backward-compatible with all existing MCP clients.",
+    "mcp_response_wrapper": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "description": "Existing MCP tool result — unchanged shape."
+        },
+        "_ui": {
+          "$ref": "#/definitions/ui_view",
+          "description": "Optional UI hint. Hosts that don't recognise it ignore it."
+        }
+      },
+      "required": ["result"]
+    }
+  }
+}
