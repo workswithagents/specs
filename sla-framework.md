@@ -175,3 +175,16 @@ requests.post("https://workswithagents.dev/v1/sla/report", json={
 ---
 
 *CC BY 4.0. Free to implement. Attribution required.*
+
+---
+
+## Examples
+
+Implementation examples for this version:
+
+| Language | File |
+|----------|------|
+| Python | [sla-framework/v1.0.0/python.md](sla-framework/v1.0.0/python.md) |
+| TypeScript | [sla-framework/v1.0.0/typescript.md](sla-framework/v1.0.0/typescript.md) |
+| cURL | [sla-framework/v1.0.0/curl.md](sla-framework/v1.0.0/curl.md) |
+

@@ -268,3 +268,16 @@ Agent A                          Agent B
 ---
 
 *CC BY 4.0. Part of the Works With Agents protocol suite. See [IACP](/v1/specs/iacp.md) for the base handoff protocol.*
+
+---
+
+## Examples
+
+Implementation examples for this version:
+
+| Language | File |
+|----------|------|
+| Python | [iacp-fault-tolerance/v1.0.0/python.md](iacp-fault-tolerance/v1.0.0/python.md) |
+| TypeScript | [iacp-fault-tolerance/v1.0.0/typescript.md](iacp-fault-tolerance/v1.0.0/typescript.md) |
+| cURL | [iacp-fault-tolerance/v1.0.0/curl.md](iacp-fault-tolerance/v1.0.0/curl.md) |
+

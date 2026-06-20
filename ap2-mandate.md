@@ -183,3 +183,16 @@ spend_log:
 - [ ] Hermes Agent config integration (`AP2_MANDATE` env var)
 - [ ] Example mandate generator (CLI tool)
 - [ ] Spend reconciliation (periodic summary to human)
+
+---
+
+## Examples
+
+Implementation examples for this version:
+
+| Language | File |
+|----------|------|
+| Python | [ap2-mandate/v0.9.0/python.md](ap2-mandate/v0.9.0/python.md) |
+| TypeScript | [ap2-mandate/v0.9.0/typescript.md](ap2-mandate/v0.9.0/typescript.md) |
+| cURL | [ap2-mandate/v0.9.0/curl.md](ap2-mandate/v0.9.0/curl.md) |
+

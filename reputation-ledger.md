@@ -172,3 +172,16 @@ class ReputationClient:
 - [ ] Cross-org federation protocol
 - [ ] Human endorsement layer (LinkedIn-style recommendations for agents)
 - [ ] Reputation token bridging (portable reputation across ecosystems)
+
+---
+
+## Examples
+
+Implementation examples for this version:
+
+| Language | File |
+|----------|------|
+| Python | [reputation-ledger/v1.0.0/python.md](reputation-ledger/v1.0.0/python.md) |
+| TypeScript | [reputation-ledger/v1.0.0/typescript.md](reputation-ledger/v1.0.0/typescript.md) |
+| cURL | [reputation-ledger/v1.0.0/curl.md](reputation-ledger/v1.0.0/curl.md) |
+

@@ -265,6 +265,36 @@ Spec versions follow [Semantic Versioning](https://semver.org/) (MAJOR.MINOR.PAT
 | **MINOR** (`1.1.0`) | New sections, expanded guidance, new normative requirements (backward-compatible) |
 | **PATCH** (`1.0.1`) | Clarifications, typo fixes, non-normative improvements |
 
+## Versioned Examples
+
+Every new spec version **MUST** include implementation examples. Examples validate that the spec is implementable and provide copy-paste reference code for agents and developers.
+
+### Example Directory Structure
+
+For each spec file `{spec-name}.md` with version `{version}`:
+
+```
+{spec-name}/
+  v{version}/
+    python.md    — Complete, runnable Python implementation
+    typescript.md — Complete, runnable TypeScript implementation
+    curl.md       — cURL command examples for each API endpoint
+```
+
+### Requirements
+
+1. **Every new version** (MAJOR, MINOR, or PATCH bump) must include or update examples in the corresponding version directory
+2. **Examples must be runnable** — copy-paste should work
+3. **Examples must match the spec** — use real field names, real error handling, real message shapes
+4. **The spec file must link** to examples via an `## Examples` section (see spec-template.md for format)
+5. **PRs without examples for the version are incomplete** and will not be merged
+
+### Updating Examples
+
+- **PATCH bump** (typo fix): Update existing examples in the same version directory
+- **MINOR bump** (new features): Create new version directory with updated examples
+- **MAJOR bump** (breaking changes): Create new version directory; old version directory is preserved for reference
+
 ---
 
 ## Questions?

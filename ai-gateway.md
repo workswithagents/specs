@@ -448,3 +448,16 @@ curl -s https://gateway.internal/v1/gateway/health | jq
 ---
 
 *CC BY 4.0. Free to implement. Attribution required. Companion to the Agent Registry (./agent-registry.md) and Delegation Framework (./delegation-framework.md). Part of the Works With Agents governance suite.*
+
+---
+
+## Examples
+
+Implementation examples for this version:
+
+| Language | File |
+|----------|------|
+| Python | [ai-gateway/v1.0.0/python.md](ai-gateway/v1.0.0/python.md) |
+| TypeScript | [ai-gateway/v1.0.0/typescript.md](ai-gateway/v1.0.0/typescript.md) |
+| cURL | [ai-gateway/v1.0.0/curl.md](ai-gateway/v1.0.0/curl.md) |
+

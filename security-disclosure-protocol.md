@@ -366,3 +366,16 @@ report_vulnerability(
 ---
 
 *"Security bugs found by AI agents need a responsible disclosure pipeline. This is it."*
+
+---
+
+## Examples
+
+Implementation examples for this version:
+
+| Language | File |
+|----------|------|
+| Python | [security-disclosure-protocol/v1.0.1/python.md](security-disclosure-protocol/v1.0.1/python.md) |
+| TypeScript | [security-disclosure-protocol/v1.0.1/typescript.md](security-disclosure-protocol/v1.0.1/typescript.md) |
+| cURL | [security-disclosure-protocol/v1.0.1/curl.md](security-disclosure-protocol/v1.0.1/curl.md) |
+

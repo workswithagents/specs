@@ -123,3 +123,16 @@ Most AI code generation tools produce output with no audit trail. You trust the 
 WWA generates code you can verify — cryptographically. An auditor can prove the code was generated from specific inputs with specific standards at a specific time, without trusting the operator, the server, or the agent.
 
 This is the difference between "trust me" and "verify it yourself."
+
+---
+
+## Examples
+
+Implementation examples for this version:
+
+| Language | File |
+|----------|------|
+| Python | [auditor-verification/v1.0.0/python.md](auditor-verification/v1.0.0/python.md) |
+| TypeScript | [auditor-verification/v1.0.0/typescript.md](auditor-verification/v1.0.0/typescript.md) |
+| cURL | [auditor-verification/v1.0.0/curl.md](auditor-verification/v1.0.0/curl.md) |
+

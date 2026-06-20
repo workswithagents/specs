@@ -456,3 +456,16 @@ the choice of UUIDv7 for message ordering.
 RFC Editor: Remove this section before publication.
 
 - **draft-vystartas-iacp-00** (2026-05-06): Initial version.
+
+---
+
+## Examples
+
+Implementation examples for this version:
+
+| Language | File |
+|----------|------|
+| Python | [iacp-internet-draft/draft-00/python.md](iacp-internet-draft/draft-00/python.md) |
+| TypeScript | [iacp-internet-draft/draft-00/typescript.md](iacp-internet-draft/draft-00/typescript.md) |
+| cURL | [iacp-internet-draft/draft-00/curl.md](iacp-internet-draft/draft-00/curl.md) |
+

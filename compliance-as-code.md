@@ -350,3 +350,16 @@ curl -X POST https://workswithagents.dev/v1/compliance/validate \
 ---
 
 *CC BY 4.0. Regulation packs: free to use. Custom regulation translation: enterprise service.*
+
+---
+
+## Examples
+
+Implementation examples for this version:
+
+| Language | File |
+|----------|------|
+| Python | [compliance-as-code/v1.0.0/python.md](compliance-as-code/v1.0.0/python.md) |
+| TypeScript | [compliance-as-code/v1.0.0/typescript.md](compliance-as-code/v1.0.0/typescript.md) |
+| cURL | [compliance-as-code/v1.0.0/curl.md](compliance-as-code/v1.0.0/curl.md) |
+

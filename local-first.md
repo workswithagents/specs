@@ -33,3 +33,16 @@ Local-First Certification verifies that an AI agent or agent infrastructure oper
 - Identity Protocol (L2) — agents must have cryptographic identity before certification
 - Trust Score (L3) — Local-First certification contributes positively to trust score
 - Onboarding Protocol (L1) — certification is part of agent provisioning
+
+---
+
+## Examples
+
+Implementation examples for this version:
+
+| Language | File |
+|----------|------|
+| Python | [local-first/v1.0.0/python.md](local-first/v1.0.0/python.md) |
+| TypeScript | [local-first/v1.0.0/typescript.md](local-first/v1.0.0/typescript.md) |
+| cURL | [local-first/v1.0.0/curl.md](local-first/v1.0.0/curl.md) |
+

@@ -199,3 +199,16 @@ A Deployment Manifest touches all layers:
 ---
 
 *CC BY 4.0. Free to implement. Attribution required.*
+
+---
+
+## Examples
+
+Implementation examples for this version:
+
+| Language | File |
+|----------|------|
+| Python | [deployment-manifest/v1.0.0/python.md](deployment-manifest/v1.0.0/python.md) |
+| TypeScript | [deployment-manifest/v1.0.0/typescript.md](deployment-manifest/v1.0.0/typescript.md) |
+| cURL | [deployment-manifest/v1.0.0/curl.md](deployment-manifest/v1.0.0/curl.md) |
+

@@ -264,3 +264,16 @@ Auditor conclusion:
 | Clarification Protocol (#17) | Attestation references clarification chain — "generated after 1 round of clarification" |
 | Handoff Protocol (#8) | Attestation included in handoff context pack |
 | SLA Framework (#12) | Attestation counts as "validated output" for SLA metrics |
+
+---
+
+## Examples
+
+Implementation examples for this version:
+
+| Language | File |
+|----------|------|
+| Python | [attestation-protocol/v1.0.0/python.md](attestation-protocol/v1.0.0/python.md) |
+| TypeScript | [attestation-protocol/v1.0.0/typescript.md](attestation-protocol/v1.0.0/typescript.md) |
+| cURL | [attestation-protocol/v1.0.0/curl.md](attestation-protocol/v1.0.0/curl.md) |
+
