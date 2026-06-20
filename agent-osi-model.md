@@ -343,3 +343,15 @@ This document is published under CC BY 4.0. Cite as:
 ---
 
 *Infrastructure specs for Layer 3 (Agent Capability Manifest), Layer 5 (Coordination Protocol), and Layer 7 (Agent Transaction Protocol) follow in companion documents.*
+
+---
+
+## Examples
+
+Implementation examples for this version:
+
+| Language | File |
+|----------|------|
+| Python | [agent-osi-model/v1.0.0/python.md](agent-osi-model/v1.0.0/python.md) |
+| TypeScript | [agent-osi-model/v1.0.0/typescript.md](agent-osi-model/v1.0.0/typescript.md) |
+| cURL | [agent-osi-model/v1.0.0/curl.md](agent-osi-model/v1.0.0/curl.md) |

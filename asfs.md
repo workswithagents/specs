@@ -141,3 +141,15 @@ curl https://workswithagents.dev/v1/skills?tag=python
 - [ ] Claude Code → ASFS converter
 - [ ] Codex → ASFS converter
 - [ ] Formal RFC submission (IETF-style)
+
+---
+
+## Examples
+
+Implementation examples for this version:
+
+| Language | File |
+|----------|------|
+| Python | [asfs/v1.0.0/python.md](asfs/v1.0.0/python.md) |
+| TypeScript | [asfs/v1.0.0/typescript.md](asfs/v1.0.0/typescript.md) |
+| cURL | [asfs/v1.0.0/curl.md](asfs/v1.0.0/curl.md) |
