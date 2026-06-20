@@ -164,3 +164,15 @@ if (tier === "trusted") delegate(task, "target-agent");
 ---
 
 *CC BY 4.0. Free to implement. Attribution required.*
+
+---
+
+## Examples
+
+Implementation examples for this version:
+
+| Language | File |
+|----------|------|
+| Python | [trust-score/v1.0.0/python.md](trust-score/v1.0.0/python.md) |
+| TypeScript | [trust-score/v1.0.0/typescript.md](trust-score/v1.0.0/typescript.md) |
+| cURL | [trust-score/v1.0.0/curl.md](trust-score/v1.0.0/curl.md) |
