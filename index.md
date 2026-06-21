@@ -91,3 +91,25 @@ TypeScript SDK: `npm install @workswithagents/agent-foundry`
 
 All specifications: CC BY 4.0 — Free to use, cite, and build upon. Attribution required.
 All reference implementations: CC BY 4.0.
+
+## Related Standards & Ecosystem
+
+The Agent OSI Model organizes agent infrastructure into layers. We maintain specs for most layers, but some areas are served by other standards — linked here for a complete picture. Each has its own governance, license, and community.
+
+| Layer | Standard | Steward | Relationship |
+|-------|----------|---------|-------------|
+| L1 — Tool Integration | [Model Context Protocol](related/mcp.md) | Anthropic / LF Projects | Complementary — MCP defines tool wire protocol. WWA ASFS covers skill format. A WWA agent uses both. |
+| L1 — Knowledge Context | [Open Knowledge Format](related/okf.md) | Google Cloud | Complementary — OKF defines portable knowledge bundles (markdown+YAML). Complements llms.txt and spec content. |
+| L4 — Handoff | [Google Agent-to-Agent](related/a2a.md) | Google | Overlapping — both define agent handoff. A2A uses JSON-RPC cards; WWA uses state_context_hash + Ed25519. |
+| L4/L5 — Async Collaboration | [AAMP — Agent Async Messaging Protocol](related/aamp.md) | ByteDance / Lark | Complementary — WWA ECP covers sync; AAMP covers async mailbox dispatch over SMTP/JMAP. |
+| L4/L5 — P2P Overlay | [Pilot Protocol](related/pilot-protocol.md) | Community | Overlapping — P2P overlay for agent discovery and communication ("Internet of Agents"). |
+| L5 — Orchestration | [OpenAI Agents SDK](related/openai-agents-sdk.md) | OpenAI | SDK-level implementation. Handoff patterns similar to WWA IACP. Proprietary models, OSS SDK. |
+| L5 — Orchestration | [LangGraph](related/langgraph.md) | LangChain | Framework-level. Stateful multi-agent graphs. OSS SDK, proprietary platform (LangSmith). |
+| L5 — Coordination | [AutoGen](related/autogen.md) | Microsoft | Framework-level. Multi-agent conversation. OSS, MIT. |
+| L5 — Coordination | [CrewAI](related/crewai.md) | CrewAI | Framework-level. Role-based agent crews. OSS. |
+| L6 — Verification | [MLPerf](related/mlperf.md) | MLCommons | Industry-standard ML benchmarks. WWA benchmarks are agent-task specific. |
+| L6 — Verification | [GAIA](related/gaia.md) | Meta FAIR / Hugging Face | Academic agent evaluation. WWA benchmarks cover coding; GAIA covers general assistant tasks. |
+| L6 — Verification | [HELM](related/helm.md) | Stanford CRFM | Comprehensive LLM evaluation framework. WWA benchmarks are agent-specific; HELM is model-centric. |
+| L7 — Audit | [DCP — Accountability Protocol](related/dcp.md) | Community | Complementary — WWA Attestation covers semantic verification; DCP adds cryptographic audit trails with merkle trees. |
+
+Being the source of truth doesn't mean pretending nothing else exists. Acknowledging the broader ecosystem makes WWA a navigator, not a walled garden. Each external standard is listed with a specific relationship — complement, overlap, or gap-fill.
