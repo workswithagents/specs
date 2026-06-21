@@ -38,3 +38,4 @@ Implementation examples for this version:
 |----------|------|
 | Python | [related-autogen/v1.0.0/python.md](related-autogen/v1.0.0/python.md) |
 | TypeScript | [related-autogen/v1.0.0/typescript.md](related-autogen/v1.0.0/typescript.md) |
+| .NET (C#) | [related-autogen/v1.0.0/dotnet.md](related-autogen/v1.0.0/dotnet.md) |
