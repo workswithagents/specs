@@ -32,45 +32,8 @@ Developed and maintained by the Stanford Center for Research on Foundation Model
 
 ## Examples
 
-### Python
-```python
-from helm.benchmark.runner import run_benchmarking
-from helm.common.authentication import Authentication
-from helm.common.request import Request, RequestResult
+Implementation examples for this version:
 
-# Run a single evaluation
-request = Request(
-    model="openai/gpt-4o",
-    prompt="What is the capital of France?",
-    temperature=0.0,
-    max_tokens=10,
-)
-
-# Run a full benchmark suite
-results = run_benchmarking(
-    models=["openai/gpt-4o", "anthropic/claude-3-5-sonnet"],
-    scenarios=["mmlu", "truthful_qa", "gsm8k"],
-    metrics=["accuracy", "calibration", "robustness"],
-    max_instances=100,
-    output_path="./helm-results",
-)
-
-# Analyze results
-for model_result in results:
-    print(f"Model: {model_result.model}")
-    for metric in model_result.metrics:
-        print(f"  {metric.name}: {metric.value:.3f}")
-```
-
-### CLI
-```bash
-# Run HELM evaluation from the command line
-helm-run \
-  --run-specs "mmlu:model=openai/gpt-4o,model=anthropic/claude-3-5-sonnet" \
-  --max-eval-instances 100 \
-  --suite v1 \
-  --output-path ./helm-results
-
-# Summarize results
-helm-summarize --suite v1 --output-path ./helm-results
-```
+| Language | File |
+|----------|------|
+| Python | [related-helm/v1.0.0/python.md](related-helm/v1.0.0/python.md) |

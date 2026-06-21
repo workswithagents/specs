@@ -32,48 +32,9 @@ Created and maintained by Google under Apache 2.0 license. The project is open-s
 
 ## Examples
 
-### Python
-```python
-from a2a.client import A2AClient
-from a2a.types import TaskSendParams, Message, Part, Task
+Implementation examples for this version:
 
-async def main():
-    client = A2AClient("http://agent-b.example.com")
-
-    # Send task to another agent
-    task: Task = await client.send_task(
-        TaskSendParams(
-            message=Message(
-                role="user",
-                parts=[Part.from_text("Analyze this dataset")],
-            )
-        )
-    )
-
-    # Poll for status
-    status = await client.get_task(task.id)
-    print(f"Status: {status.state}")
-
-    # Subscribe to streaming updates
-    async for event in client.subscribe(task.id):
-        print(f"Update: {event}")
-```
-
-### TypeScript
-```typescript
-import { A2AClient } from "@a2aproject/sdk";
-
-const client = new A2AClient("http://agent-b.example.com");
-
-const task = await client.sendTask({
-  message: {
-    role: "user",
-    parts: [{ text: "Analyze this dataset" }],
-  },
-});
-
-// Stream updates
-for await (const event of client.subscribeToTask(task.id)) {
-  console.log("Update:", event);
-}
-```
+| Language | File |
+|----------|------|
+| Python | [related-a2a/v1.0.0/python.md](related-a2a/v1.0.0/python.md) |
+| TypeScript | [related-a2a/v1.0.0/typescript.md](related-a2a/v1.0.0/typescript.md) |

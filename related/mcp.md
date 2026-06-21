@@ -32,46 +32,9 @@ Originally created by Anthropic and contributed to the Linux Foundation (LF Proj
 
 ## Examples
 
-### Python
-```python
-import asyncio
-from mcp import ClientSession, StdioServerParameters
-from mcp.client.stdio import stdio_client
+Implementation examples for this version:
 
-async def main():
-    server_params = StdioServerParameters(
-        command="python",
-        args=["my_mcp_server.py"]
-    )
-    async with stdio_client(server_params) as (read, write):
-        async with ClientSession(read, write) as session:
-            await session.initialize()
-            tools = await session.list_tools()
-            result = await session.call_tool("search", {"query": "hello"})
-            print(result)
-
-asyncio.run(main())
-```
-
-### TypeScript
-```typescript
-import { Client } from "@modelcontextprotocol/sdk/client/index.js";
-import { StdioClientTransport } from "@modelcontextprotocol/sdk/client/stdio.js";
-
-const transport = new StdioClientTransport({
-  command: "node",
-  args: ["server.js"],
-});
-
-const client = new Client({
-  name: "example-client",
-  version: "1.0.0",
-});
-
-await client.connect(transport);
-const tools = await client.listTools();
-const result = await client.callTool({
-  name: "search",
-  arguments: { query: "hello" },
-});
-```
+| Language | File |
+|----------|------|
+| Python | [related-mcp/v1.0.0/python.md](related-mcp/v1.0.0/python.md) |
+| TypeScript | [related-mcp/v1.0.0/typescript.md](related-mcp/v1.0.0/typescript.md) |

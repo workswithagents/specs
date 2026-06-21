@@ -32,36 +32,9 @@ Created and maintained by Google Cloud under MIT license with Apache 2.0 compati
 
 ## Examples
 
-### Python (Reference Agent)
-```python
-from okf import KnowledgeBundle, Concept
+Implementation examples for this version:
 
-bundle = KnowledgeBundle.load("./my-knowledge-bundle")
-
-# Query concepts
-concept = bundle.get_concept("agent/identity")
-print(f"Title: {concept.title}")
-print(f"Description: {concept.description}")
-print(f"Related: {concept.related_concepts}")
-
-# Enrich with BigQuery
-enriched = bundle.enrich_with_bigquery(
-    query="SELECT context FROM knowledge_base WHERE concept = @name",
-    params={"name": concept.id}
-)
-```
-
-### Shell (Bundle Structure)
-```bash
-# OKF bundle directory structure
-my-knowledge-bundle/
-├── okf.yaml                    # Bundle metadata
-├── concepts/
-│   ├── agent/
-│   │   ├── identity.md         # Concept definition
-│   │   └── capabilities.md
-│   └── protocol/
-│       ├── handoff.md
-│       └── attestation.md
-└── cross-references.yaml       # Explicit cross-links
-```
+| Language | File |
+|----------|------|
+| Python (Reference Agent) | [related-okf/v1.0.0/python.md](related-okf/v1.0.0/python.md) |
+| Shell (Bundle Structure) | [related-okf/v1.0.0/bash.md](related-okf/v1.0.0/bash.md) |

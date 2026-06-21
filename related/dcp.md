@@ -32,50 +32,8 @@ Community-driven open-source project under the `dcp-ai-protocol` GitHub organiza
 
 ## Examples
 
-### TypeScript
-```typescript
-import { AuditLog, signAction, verifyChain } from "@dcp-ai/sdk";
+Implementation examples for this version:
 
-const log = new AuditLog("agent-001");
-
-// Sign and append an action
-const entry = signAction(
-  { action: "tool.invoke", tool: "terminal", command: "npm test" },
-  ed25519PrivateKey
-);
-log.append(entry);
-
-// Get the Merkle root for external verification
-const root = log.merkleRoot();
-console.log("Merkle root:", root);
-
-// A third party verifies the chain
-const isValid = verifyChain(log.entries);
-console.log("Chain valid:", isValid);
-
-// Post-quantum mode
-const pqEntry = signAction(
-  { action: "agent.deploy", target: "prod" },
-  mlDsaPrivateKey,  // ML-DSA signature
-  { kem: "ML-KEM-768" }
-);
-log.append(pqEntry);
-```
-
-### Rust
-```rust
-use dcp_ai::{AuditLog, Action, sign_action, verify_chain};
-
-let mut log = AuditLog::new("agent-001");
-
-// Sign and append
-let entry = sign_action(
-    Action::new("tool.invoke", r#"{"command": "npm test"}"#),
-    &ed25519_keypair,
-);
-log.append(entry);
-
-// Verify chain integrity
-assert!(verify_chain(&log.entries).is_ok());
-println!("Merkle root: {}", log.merkle_root());
-```
+| Language | File |
+|----------|------|
+| TypeScript | [related-dcp/v1.0.0/typescript.md](related-dcp/v1.0.0/typescript.md) |
