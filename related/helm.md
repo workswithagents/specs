@@ -1,6 +1,6 @@
 # Holistic Evaluation of Language Models (HELM)
 
-**Version:** latest
+**Version:** 0.5.16
 **Status:** Published
 **Layer:** L6 — Verification
 **Steward:** Stanford CRFM

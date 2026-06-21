@@ -1,6 +1,6 @@
 # CrewAI
 
-**Version:** latest
+**Version:** 1.9.3
 **Status:** Published
 **Layer:** L5 — Coordination
 **Steward:** CrewAI

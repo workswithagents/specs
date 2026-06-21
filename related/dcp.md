@@ -1,6 +1,6 @@
 # Data Chain Protocol — Accountability Protocol (DCP)
 
-**Version:** pre-release
+**Version:** 2.8.1
 **Status:** Published
 **Layer:** L7 — Audit
 **Steward:** Community (dcp-ai-protocol)

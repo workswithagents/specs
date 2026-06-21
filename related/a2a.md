@@ -1,6 +1,6 @@
 # Agent-to-Agent Protocol (A2A)
 
-**Version:** 1.0 (2025)
+**Version:** 1.0.1
 **Status:** Published
 **Layer:** L4 — Session / Handoff
 **Steward:** Google

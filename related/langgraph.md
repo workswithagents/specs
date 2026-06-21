@@ -1,6 +1,6 @@
 # LangGraph
 
-**Version:** latest
+**Version:** 1.2.6
 **Status:** Published
 **Layer:** L5 — Orchestration
 **Steward:** LangChain

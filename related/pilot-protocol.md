@@ -1,6 +1,6 @@
 # Pilot Protocol
 
-**Version:** pre-release
+**Version:** 1.11.2
 **Status:** Published
 **Layer:** L4/L5 — Session / Coordination
 **Steward:** Community (pilot-protocol)

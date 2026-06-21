@@ -1,6 +1,6 @@
 # GAIA — General AI Assistants Benchmark
 
-**Version:** latest
+**Version:** 1.0
 **Status:** Published
 **Layer:** L6 — Verification
 **Steward:** Meta FAIR / Hugging Face

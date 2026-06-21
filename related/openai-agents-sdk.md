@@ -1,6 +1,6 @@
 # OpenAI Agents SDK
 
-**Version:** latest
+**Version:** 0.17.6
 **Status:** Published
 **Layer:** L5 — Orchestration
 **Steward:** OpenAI

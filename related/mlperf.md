@@ -1,6 +1,6 @@
 # MLPerf
 
-**Version:** latest
+**Version:** 5.1.1
 **Status:** Published
 **Layer:** L6 — Verification
 **Steward:** MLCommons
