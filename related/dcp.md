@@ -36,4 +36,5 @@ Implementation examples for this version:
 
 | Language | File |
 |----------|------|
+| Python | [related-dcp/v1.0.0/python.md](related-dcp/v1.0.0/python.md) |
 | TypeScript | [related-dcp/v1.0.0/typescript.md](related-dcp/v1.0.0/typescript.md) |

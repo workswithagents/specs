@@ -37,6 +37,7 @@ Implementation examples for this version:
 
 | Language | File |
 |----------|------|
-| Python SDK | [related-aamp/v1.0.0/python.md](related-aamp/v1.0.0/python.md) |
-| Node.js SDK | [related-aamp/v1.0.0/javascript.md](related-aamp/v1.0.0/javascript.md) |
+| Python | [related-aamp/v1.0.0/python.md](related-aamp/v1.0.0/python.md) |
+| TypeScript | [related-aamp/v1.0.0/typescript.md](related-aamp/v1.0.0/typescript.md) |
 | CLI | [related-aamp/v1.0.0/bash.md](related-aamp/v1.0.0/bash.md) |
+| Node.js SDK | [related-aamp/v1.0.0/javascript.md](related-aamp/v1.0.0/javascript.md) |

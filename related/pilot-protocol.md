@@ -36,4 +36,6 @@ Implementation examples for this version:
 
 | Language | File |
 |----------|------|
+| Python | [related-pilot-protocol/v1.0.0/python.md](related-pilot-protocol/v1.0.0/python.md) |
+| TypeScript | [related-pilot-protocol/v1.0.0/typescript.md](related-pilot-protocol/v1.0.0/typescript.md) |
 | Go SDK | [related-pilot-protocol/v1.0.0/go.md](related-pilot-protocol/v1.0.0/go.md) |

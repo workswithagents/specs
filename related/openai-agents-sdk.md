@@ -36,4 +36,5 @@ Implementation examples for this version:
 
 | Language | File |
 |----------|------|
-| Python (Agent + Runner + Handoff) | [related-openai-agents-sdk/v1.0.0/python.md](related-openai-agents-sdk/v1.0.0/python.md) |
+| Python | [related-openai-agents-sdk/v1.0.0/python.md](related-openai-agents-sdk/v1.0.0/python.md) |
+| TypeScript | [related-openai-agents-sdk/v1.0.0/typescript.md](related-openai-agents-sdk/v1.0.0/typescript.md) |

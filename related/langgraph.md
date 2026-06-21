@@ -37,3 +37,4 @@ Implementation examples for this version:
 | Language | File |
 |----------|------|
 | Python | [related-langgraph/v1.0.0/python.md](related-langgraph/v1.0.0/python.md) |
+| TypeScript | [related-langgraph/v1.0.0/typescript.md](related-langgraph/v1.0.0/typescript.md) |

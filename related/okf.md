@@ -36,5 +36,6 @@ Implementation examples for this version:
 
 | Language | File |
 |----------|------|
-| Python (Reference Agent) | [related-okf/v1.0.0/python.md](related-okf/v1.0.0/python.md) |
-| Shell (Bundle Structure) | [related-okf/v1.0.0/bash.md](related-okf/v1.0.0/bash.md) |
+| Python | [related-okf/v1.0.0/python.md](related-okf/v1.0.0/python.md) |
+| TypeScript | [related-okf/v1.0.0/typescript.md](related-okf/v1.0.0/typescript.md) |
+| CLI | [related-okf/v1.0.0/bash.md](related-okf/v1.0.0/bash.md) |

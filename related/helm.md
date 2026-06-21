@@ -37,3 +37,4 @@ Implementation examples for this version:
 | Language | File |
 |----------|------|
 | Python | [related-helm/v1.0.0/python.md](related-helm/v1.0.0/python.md) |
+| TypeScript | [related-helm/v1.0.0/typescript.md](related-helm/v1.0.0/typescript.md) |

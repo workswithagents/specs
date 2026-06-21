@@ -37,3 +37,4 @@ Implementation examples for this version:
 | Language | File |
 |----------|------|
 | Python | [related-crewai/v1.0.0/python.md](related-crewai/v1.0.0/python.md) |
+| TypeScript | [related-crewai/v1.0.0/typescript.md](related-crewai/v1.0.0/typescript.md) |
