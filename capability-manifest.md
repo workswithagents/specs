@@ -25,6 +25,31 @@ The Agent Capability Manifest is a machine-readable declaration of what an AI ag
 
 **Solution:** Every agent publishes a Capability Manifest at a known location. Orchestrators and other agents query the manifest to discover capabilities. The registry keeps it current via heartbeat.
 
+### When to use
+- **Every agent should have a manifest** — it's the minimum viable WWA spec
+- You're building any agent that might receive work from outside
+- You want your agent discoverable in a registry or by other agents
+- You need to advertise performance metrics (success rate, avg duration) so orchestrators can make informed assignments
+- You're deploying a fleet where agents may restart, relocate, or scale up/down
+
+### When NOT to use
+- Truly ephemeral agents that run once and disappear (though even these benefit from a manifest during their lifetime)
+- Agents that only respond to a single human user and never interact with other agents (e.g., a personal coding assistant used by one person)
+
+### How it compares to similar specs
+| Instead of Capability Manifest | When | Because |
+|-------------------------------|------|---------|
+| Agent Registry | You need a central directory of all agents, not just one agent's self-declaration | Manifest is per-agent; Registry aggregates manifests |
+| IACP query/response | You need to ask a specific peer what it can do right now | IACP query is dynamic and real-time; Manifest is a static declaration |
+| Trust Score | You need to evaluate *trustworthiness*, not just capability | Manifest says *what*; Trust Score says *how reliable* |
+
+### What you lose without Capability Manifest
+- Orchestrators cannot discover what your agent does — they must hardcode assumptions
+- Agent replacement requires manual reconfiguration (new agent, new config)
+- No standard format for capability advertisement — each ecosystem reinvents it
+- Performance metrics cannot be published — orchestrators assign blind
+- Cross-ecosystem discovery requires bespoke adapters per platform
+
 ---
 
 ## 3. Manifest Schema

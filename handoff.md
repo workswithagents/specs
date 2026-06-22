@@ -11,6 +11,41 @@ Define how one AI agent transfers an in-progress task to another agent — with 
 
 MCP (Model Context Protocol) handles agent→tool. IACP handles agent↔agent async messaging. Handoff handles agent→agent task transfer — the moment where one agent's work becomes another agent's responsibility.
 
+### Problem
+An agent starts a task (review code, build a component, analyze data) but cannot finish it — it hits a skill boundary, a permission limit, or the task requires a different model/runtime. The work-in-progress must move to another agent without losing context, state, or attribution. Without a standard handoff, this requires manual transfer — copy-paste context, re-explain requirements, lose provenance.
+
+### Solution
+The Handoff Protocol defines a lifecycle: sender proposes a handoff with full context (task_id, state snapshot, memory, workspace), receiver acknowledges or rejects, sender gets a verifiable receipt. Both parties can track progress and confirm completion. The handoff chain is auditable end-to-end.
+
+### When to use
+- An agent cannot complete a task and needs to pass it to a specialist
+- A pipeline of agents where each stage hands off to the next (build → review → deploy)
+- A task outgrows its current runtime (needs a bigger model, different tools)
+- You need an audit trail of which agent did what in a multi-agent workflow
+- Handing work between agents running on different machines or in different trust domains
+
+### When NOT to use
+- All work happens in one agent — no handoff needed
+- Agents communicate ongoing dialogue, not task transfer — use IACP instead
+- The task is so small that handoff overhead exceeds the work itself
+- You need ephemeral communication that leaves no trace — use ECP instead
+- Humans should make the transfer decision — handoff implies autonomous agent decision
+
+### How it compares to similar specs
+| Instead of Handoff | When | Because |
+|-------------------|------|---------|
+| IACP | Agents need ongoing dialogue, not one-shot task transfer | IACP is bidirectional; Handoff is one-directional task pass |
+| ECP | Task context must self-destruct after completion | ECP guarantees no persistence; Handoff preserves audit trail |
+| Delegation Framework | You need *authority* to assign, not just *mechanics* of transfer | Delegation covers who can assign; Handoff covers how to transfer |
+| Coordination Protocol | Multiple agents need to vote on who should take the task | Coordination is consensus; Handoff is direct transfer between two agents |
+
+### What you lose without Handoff Protocol
+- Task handoffs are ad-hoc — context gets lost, dropped, or stale
+- No verifiable acceptance — sender cannot prove the task was received
+- No audit trail — you cannot reconstruct who worked on what
+- Handoffs between different frameworks require custom bridges
+- Task state must be manually re-created at each hop
+
 ## 2. Design Principles
 
 - **Complete context transfer.** No handoff is partial. The receiving agent gets everything the sending agent has about the task.

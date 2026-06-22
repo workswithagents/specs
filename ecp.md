@@ -19,6 +19,41 @@ Problem: every existing communication platform (Telegram, Discord, Slack, email,
 
 ECP solves this with a simple guarantee: **after the TTL, the room and all its contents cease to exist.**
 
+### Problem
+See above. Every existing platform retains data indefinitely. For regulated industries, speculative discussions, or privacy-sensitive contexts, this is a dealbreaker.
+
+### Solution
+ECP creates in-memory-only communication rooms with a hard time-to-live. After TTL expires, the room and all its messages are cryptographically destroyed. No forensic recovery is possible — the data never touched persistent storage.
+
+### When to use
+- Agents operating under GDPR, HIPAA, or other data retention regulations
+- Agents discussing provisional/confidential information before it's ready to be permanent
+- Security-sensitive workflows where leaving no trace is a requirement
+- Human-agent conversations where the human wants privacy guarantees
+- Multi-party negotiations where each round should be self-contained
+
+### When NOT to use
+- You need an audit trail — use Handoff or IACP instead
+- The conversation has lasting value (decisions, code, documentation that should be preserved)
+- Compliance requires keeping records of agent interactions
+- You're coordinating long-running tasks that may outlive the TTL
+- Debugging — ephemeral rooms make post-mortem analysis impossible
+
+### How it compares to similar specs
+| Instead of ECP | When | Because |
+|---------------|------|---------|
+| IACP | You need persistent message history and audit trails | IACP persists; ECP guarantees destruction |
+| Handoff Protocol | You need to transfer task context permanently | Handoff preserves context; ECP destroys it |
+| ECP Bridge | You need an existing IACP agent to communicate via ECP for a single exchange | Bridge provides interoperable ephemeral channel |
+| Coordination Protocol | You need consensus decisions that should be recorded | Coordination records outcomes; ECP leaves no trace |
+
+### What you lose without ECP
+- Every agent conversation leaves a permanent record — forever
+- No option for privacy-guaranteed agent communication
+- Regulated use cases (healthcare, finance, legal) cannot use agents for preliminary discussions
+- Humans cannot have off-the-record conversations with their agents
+- Speculative or provisional information is persisted regardless of intent
+
 ---
 
 ## 2. Design Principles

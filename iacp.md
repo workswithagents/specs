@@ -11,6 +11,44 @@ Define how AI agents discover, negotiate, and communicate with each other bidire
 
 An agent should be able to: discover peers, query capabilities, send messages, receive responses, and negotiate shared work — all without a human intermediary.
 
+### Problem
+You have 3+ agents that need to discover each other, negotiate work, and exchange messages bidirectionally without a human routing every interaction. Each new agent requires manual wiring — addresses, capabilities, auth — hardcoded in configuration files that drift over time.
+
+### Solution
+IACP defines a standard JSON-RPC envelope with typed messages (request, response, event, error, heartbeat) and intents (handoff, query, negotiate, notify, health). Agents discover peers dynamically, exchange capability manifests, and communicate over any transport.
+
+### When to use
+- You run a fleet of specialized agents that hand off work to each other
+- Agents need to discover peers dynamically (not hardcoded addresses)
+- You need full-duplex communication (request/response, events, heartbeats)
+- Orchestration frameworks (LangGraph, CrewAI) need a standard agent-to-agent wire protocol
+- Agents from different owners/projects need to interoperate
+- You need to query a peer's capabilities before assigning work
+
+### When NOT to use
+- Single agent doing one isolated task — use Capability Manifest only
+- Agent-to-tool communication — use MCP instead
+- One-shot task handoff with no ongoing dialogue — use Handoff Protocol alone
+- Ephemeral conversations that must leave no trace — use ECP instead
+- Human-routed workflow where a person assigns each task manually
+- All agents run in the same process/memory space — function calls are cheaper
+
+### How it compares to similar specs
+| Instead of IACP | When | Because |
+|----------------|------|---------|
+| Handoff Protocol | You just need to pass a task once, not maintain a conversation | Handoff is one-shot; IACP is bidirectional with ongoing dialogue |
+| ECP | Messages must self-destruct after TTL | ECP guarantees data destruction; IACP persists messages by default |
+| MCP Bridge | Your agent already speaks MCP and needs IACP interop | Bridge translates MCP tool calls into IACP agent-to-agent messages |
+| Coordination Protocol | You need consensus/voting across a group, not 1:1 messaging | Coordination is multi-party; IACP is peer-to-peer |
+| Delegation Framework | You need hierarchical authority chains for task assignment | Delegation says *who can assign*; IACP says *how they communicate* |
+
+### What you lose without IACP
+- Every agent pair requires custom message format integration — no standard envelope
+- Peers must be hardcoded or discovered out-of-band (no standard discovery)
+- No message tracing, correlation IDs, or structured error handling across agents
+- No standard heartbeat mechanism to detect peer failures
+- Agents from different ecosystems cannot interoperate without bespoke adapters
+
 ## 2. Design Principles
 
 - **Async-first** — agents operate on different schedules. Messages queue until recipient is available.

@@ -15,6 +15,40 @@ Delegation answers: **"On whose behalf is this agent acting, and how far does th
 
 An agent without delegation is an island. It acts for itself, not for a user or another agent. An agent with delegation can accept tasks, propagate scope, and return results — all with a verifiable chain back to the original authoriser.
 
+### Problem
+When agent A asks agent B to do something, how does agent B know this request is legitimate? Without delegation, agent B has no way to verify that agent A has the authority to make the request. This leads to either: (a) every agent trusts every other agent (dangerous), or (b) all authority is hardcoded (inflexible). Delegation solves this with bounded, verifiable authority tokens.
+
+### Solution
+The Delegation Framework defines delegation tokens — cryptographically signed, scoped, time-bound authority grants. Agent A creates a token saying "I authorise agent B to do X on resource Y until time T." Agent B presents this token downstream. Each hop narrows the scope. The full chain is auditable.
+
+### When to use
+- You need to know *who authorised this action* — not just *which agent did it*
+- Agents act on behalf of different users with different permission levels
+- You need an auditable chain of authority for compliance (who approved what)
+- Tasks flow through multiple agents, each adding value, and you need attribution
+- You want to grant temporary, scoped access without sharing full credentials
+
+### When NOT to use
+- All agents share the same authority — no permission boundaries exist
+- Every task is directly assigned by a human — no autonomous delegation decisions
+- The trust model is "any agent can do anything" (e.g., a single-user personal assistant)
+- Performance matters more than auditability — delegation verification adds overhead
+
+### How it compares to similar specs
+| Instead of Delegation Framework | When | Because |
+|--------------------------------|------|---------|
+| Handoff Protocol | You just need to transfer a task, not grant authority | Handoff is about mechanics; Delegation is about authorisation |
+| IACP | You need peer-to-peer messaging without authority chains | IACP doesn't track *on whose behalf* a message is sent |
+| Coordination Protocol | You need consensus among equals, not hierarchy | Coordination is flat; Delegation is hierarchical |
+| Identity Protocol | You need to know *who*, not *on whose behalf* | Identity proves the agent; Delegation proves the authority chain |
+
+### What you lose without Delegation Framework
+- No way to verify that an agent's request is legitimately authorised
+- Authority is all-or-nothing — either every agent trusts every other, or nothing gets done
+- No audit trail for *who authorised what* — compliance gaps
+- Agents cannot safely delegate to untrusted downstream agents
+- Token theft is undetectable — no scope, no expiry, no chain
+
 ---
 
 ## 2. Design Principles

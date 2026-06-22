@@ -16,6 +16,41 @@ The Agent Coordination Protocol defines how multiple AI agents work together sim
 3. **Conflict Resolution** — when agents disagree, who wins?
 4. **Liveness** — is this agent still alive?
 
+### Problem
+When a group of agents must cooperate on a shared goal (deploy a service, triage an incident, manage a project), they need more than point-to-point messaging. They need consensus: who leads, who does what, how to resolve disagreements, and how to detect failures. Without coordination, agents duplicate work, conflict on decisions, or stall because no one is in charge.
+
+### Solution
+ACP defines a coordination group with a leader election protocol (raft-like), work distribution by capability matching, conflict resolution via priority-based voting, and liveness via heartbeat. Any agent can initiate coordination; the group self-organises.
+
+### When to use
+- Multiple agents need to cooperate on a shared objective (deploy, incident response, batch processing)
+- You need fault-tolerant agent groups — if the leader dies, another takes over
+- Agents may conflict on decisions and need a resolution mechanism
+- Work must be distributed across a fleet without a central orchestrator
+- You need a group-wide consensus before taking action
+
+### When NOT to use
+- Only one agent works on a task — no coordination needed
+- A human orchestrates all agents and makes all decisions
+- Agents communicate pairwise without shared state (use IACP)
+- You need hierarchical authority, not group consensus (use Delegation Framework)
+- Group size is 2 — pair coordination is simpler with direct IACP
+
+### How it compares to similar specs
+| Instead of Coordination Protocol | When | Because |
+|--------------------------------|------|---------|
+| IACP | Agents need pairwise messaging, not group consensus | IACP is 1:1; ACP is N:N |
+| Delegation Framework | You need hierarchical authority, not group voting | Delegation is top-down; ACP is peer consensus |
+| Handoff Protocol | You need to pass a task from one agent to another | Handoff is sequential transfer; ACP is simultaneous coordination |
+| Trust Score | You need to know who to trust before coordinating | Trust Score evaluates reliability; ACP uses it as input for leader election |
+
+### What you lose without Coordination Protocol
+- Multi-agent groups have no leader election — single point of failure or no leadership at all
+- Work is duplicated when multiple agents pick up the same task
+- Disagreements have no resolution mechanism — conflicts stall the group
+- No standard liveness detection — dead agents are not detected until a human notices
+- Fleet coordination requires a central orchestrator or manual assignment
+
 ---
 
 ## 2. Design Principles

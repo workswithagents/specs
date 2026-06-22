@@ -13,6 +13,38 @@ Verifiable agent identity. "Is this agent really who it claims to be?" Cryptogra
 
 Beyond API keys. API keys prove you have a secret. Identity proves you ARE a specific agent.
 
+### Problem
+When agent A receives a message from agent B, how does it know agent B is genuine? API keys can be stolen, reused, or shared. Without cryptographic identity, impersonation is trivial — any agent can claim to be any other agent. Audit trails become meaningless because you can't prove who did what.
+
+### Solution
+The Identity Protocol binds each agent to a cryptographic key pair. Every message is signed with the sender's private key. Recipients verify signatures using the sender's public key, which is registered and can be revoked. This creates non-repudiable audit trails.
+
+### When to use
+- Agents from different trust domains need to communicate (different owners, orgs, or security boundaries)
+- You need an audit trail that can be verified by a third party
+- Agents handle sensitive data or financial transactions
+- You're building an open ecosystem where any agent can participate
+- Compliance requirements demand message-level authentication (SOX, SOC2, HIPAA)
+
+### When NOT to use
+- All agents run in a single trusted environment (same process, same VM, same Kubernetes namespace with mTLS)
+- The human operator is the only verifier — no automated agent-to-agent trust decisions
+- Overhead of key management outweighs the risk of impersonation (toy/side projects)
+
+### How it compares to similar specs
+| Instead of Identity Protocol | When | Because |
+|----------------------------|------|---------|
+| API keys / bearer tokens | You trust the transport layer to authenticate | API keys identify the caller, not the agent; they can be shared |
+| mTLS | You already have a service mesh or PKI | mTLS authenticates machines, not agents; agents may move between machines |
+| Attestation Protocol | You need to prove what was *done*, not who *did it* | Identity proves sender; Attestation proves actions and their compliance |
+
+### What you lose without Identity Protocol
+- Impersonation is trivial — any agent can claim any identity
+- Audit trails cannot be cryptographically verified
+- No mechanism to revoke a compromised agent's identity
+- Cross-ecosystem trust requires a central authority
+- Compliance frameworks cannot validate agent-level authentication
+
 ---
 
 ## 2. Identity Lifecycle
