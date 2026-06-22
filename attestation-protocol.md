@@ -11,6 +11,37 @@ Define how an AI agent generates a cryptographically signed, tamper-evident atte
 
 This is the **trust layer** for agent-generated code in regulated industries. No black boxes. No trust in the operator.
 
+### Problem
+Most AI code generation tools produce output with no audit trail. If an agent generates code for a regulated industry (healthcare, defence, finance), you have to trust that it followed the right standards, used the right inputs, and wasn't modified afterwards. Regulators don't accept "trust us" — they need proof.
+
+### Solution
+A cryptographically signed, tamper-evident attestation that proves: what was generated, from what inputs, applying which compliance standards, at a specific time. Every input and output is SHA-256 hashed into a Merkle tree. The attestation carries an Ed25519 signature from the agent's key. Anyone can verify without trusting the operator, the server, or the agent infrastructure.
+
+### When to use
+- Regulated industries requiring proof of how code was generated (NHS, MOD, finance)
+- Compliance audits where you need to show inputs → outputs with no tampering
+- Building provenance chains for agent-generated artifacts
+- Third-party verification of agent output by auditors
+
+### When NOT to use
+- Non-critical tasks where trust is sufficient — the overhead of attestation isn't justified
+- No compliance or audit requirements — simpler logging may suffice
+- You only need to know who generated something (not what was generated) — use the Identity Protocol
+- You need to verify compliance claims independently — use Auditor Verification
+
+### How it compares to similar specs
+| Instead of THIS | When | Because |
+|---|---|---|
+| Identity Protocol | Only need to prove who generated the output | Identity proves authorship; Attestation proves the full generation chain (inputs, standards, outputs, hashes) |
+| Auditor Verification | A third party needs to verify an existing attestation | Auditor Verification is the verification workflow; Attestation is the proof-generation protocol |
+| Compliance-as-Code | Need executable compliance rules for automated validation | Compliance-as-Code defines and validates rules; Attestation proves those rules were applied to a specific generation |
+
+### What you lose without THIS
+- No verifiable proof of what an agent generated, from what inputs, under what standards
+- Regulated industries can't accept agent-generated code without manual review
+- No cryptographic chain between inputs and outputs — modifications after generation are undetectable
+- Auditors must trust the operator, the server, and the agent — closing none of the trust gaps
+
 ## 2. Design Principles
 
 - **Inputs → Outputs, hashed.** Every input to the agent and every output file is SHA-256 hashed. The hash chain proves the output matches the inputs without re-running the generation.

@@ -13,6 +13,37 @@ The Agent Transaction Protocol defines guarantees for autonomous agent actions. 
 
 Message queues solved this for distributed systems (at-least-once, at-most-once, exactly-once delivery). This protocol solves it for agent *actions* — the things agents DO, not just the messages they send.
 
+### Problem
+When an agent says "I'll deploy this" or "I'll charge this customer," what actually happens? Did it deploy? Did it deploy only once? Can it roll back? Who's accountable? Without action-level guarantees, agents make verifiable claims about things that may or may not have happened. A message queue guarantees message delivery; it doesn't guarantee the action the message triggered.
+
+### Solution
+Three guarantee levels for agent actions: ATP-1 (best-effort, fire-and-forget), ATP-2 (at-least-once, idempotent, retry with backoff), and ATP-3 (exactly-once, with pre-action snapshot, rollback hook, human approval required). Every action is logged with intent before execution and confirmed after, creating an immutable audit trail.
+
+### When to use
+- Irreversible actions: deployments, payments, data mutations, billing
+- Any action where "did it happen?" needs a definitive answer
+- Compliance environments requiring audit trails of every agent action
+- Actions that must be idempotent to prevent double-execution
+
+### When NOT to use
+- Read-only agents with no side effects — no guarantees needed
+- Non-critical actions where best-effort is sufficient — ATP-1 is fine, this spec may be overkill
+- You only need proof of what was generated (not what was executed) — use Attestation Protocol
+- You need fleet-level service guarantees — use SLA Framework
+
+### How it compares to similar specs
+| Instead of THIS | When | Because |
+|---|---|---|
+| Attestation Protocol | Proving what an agent generated | Attestation proves output provenance; Transaction Protocol proves that an action executed with specific guarantees |
+| SLA Framework | Defining fleet-level service quality targets | SLA defines uptime and accuracy targets for the fleet; Transaction Protocol defines per-action execution guarantees |
+| Agent Economics | Handling payment between agents | Economics handles the payment model; Transaction Protocol guarantees that payment actions actually executed |
+
+### What you lose without THIS
+- No way to verify whether an agent's claimed action actually happened
+- Idempotency isn't guaranteed — double-charges and duplicate deployments are possible
+- No rollback mechanism for failed actions in regulated environments
+- Audit trail of agent actions is ad-hoc or non-existent
+
 ---
 
 ## 2. The Problem

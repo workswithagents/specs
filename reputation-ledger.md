@@ -11,6 +11,37 @@ Define an immutable, cross-organization reputation system for AI agents. Trust s
 
 Verifiable claims — signed by a verifier, not self-reported — create a tamper-evident history that survives across organizations, model updates, and agent retirements.
 
+### Problem
+Trust scores tell you how reliable an agent is right now. But when an agent crosses organizational boundaries — moving from Org A's fleet to Org B's — its trust score doesn't carry over. There's no cross-org record of what this agent has actually done, who verified its work, and whether it's trustworthy in a new context. Every organization starts from zero trust.
+
+### Solution
+An append-only, cryptographically signed ledger of claims about an agent's actions. Each claim is signed by a verifier (another agent or human), not self-reported. Claims are privacy-scoped (public, org-only, private) and queryable across organizations. The ledger creates a portable reputation that survives model updates, agent retirements, and organizational boundaries.
+
+### When to use
+- Multi-organization agent ecosystems where trust must cross boundaries
+- Tracking agent work history across model updates and retirements
+- Building portable reputation that an agent can carry between fleets
+- Verifying that an agent's claims about its history are backed by cryptographic proof
+
+### When NOT to use
+- Single-organization fleet where trust is implicit and controlled
+- You only need current reliability (not historical record) — use Trust Score
+- You only need proof of specific actions (not ongoing reputation) — use Attestation Protocol
+- All verifiers are within the same trust domain and don't need cryptographic proof
+
+### How it compares to similar specs
+| Instead of THIS | When | Because |
+|---|---|---|
+| Trust Score | Evaluating current reliability for delegation decisions | Trust Score is a real-time numeric rating; Reputation Ledger is the historical evidence that backs it up |
+| Attestation Protocol | Proving a specific generation event with cryptographic proof | Attestation proves one event; Reputation Ledger aggregates many events into a portable history |
+| Identity Protocol | Verifying who an agent is | Identity proves the agent's key; Reputation proves what the agent has done with that identity |
+
+### What you lose without THIS
+- No cross-organization reputation — every org starts from zero trust with every agent
+- Agent work history is siloed within individual organizations
+- No portable proof of an agent's track record — claims are unverifiable
+- Model updates and agent retirements reset trust to zero
+
 ## 2. Design Principles
 
 - **Verifiable, not self-reported** — claims must be signed by a third-party verifier (another agent or human).

@@ -77,6 +77,36 @@ client and server. Agents discover each other, advertise capabilities,
 exchange signed messages, negotiate work, and coordinate tasks — without
 human intermediaries.
 
+### Problem
+IACP currently exists as a WWA specification. To become an internet standard that any vendor, cloud provider, or government agency can reference in procurement, it needs to go through the IETF standardization process. Without an RFC, IACP remains a proprietary spec — useful within the WWA ecosystem but not adoptable as an industry-wide standard.
+
+### Solution
+An RFC-format Internet-Draft (draft-vystartas-iacp-00) submitted to the IETF that defines IACP in standards-body language: formal requirements using RFC 2119 keywords (MUST, SHOULD, MAY), security considerations, IANA registries, and transport bindings. This document is the bridge from "WWA spec" to "internet standard."
+
+### When to use
+- Pursuing IETF standardization for IACP
+- Referencing IACP in procurement documents that require standards-body recognition
+- Building systems that need RFC-level interoperability guarantees
+- Contributing to the IETF standardization process
+
+### When NOT to use
+- Internal use only — the WWA spec (iacp.md) is more readable and practical
+- You don't need IETF standardization — most deployments don't
+- You need implementation guidance, not standards language — use the main IACP spec
+- You need coordination-level guarantees (not messaging) — use the Coordination Protocol
+
+### How it compares to similar specs
+| Instead of THIS | When | Because |
+|---|---|---|
+| IACP (WWA spec) | Implementing IACP in your agent system | The WWA spec is more readable, has examples, and is designed for implementers; the Internet-Draft is for standards bodies |
+| Coordination Protocol | Coordinating work distribution between agents | Coordination Protocol handles leader election and work assignment; IACP handles message-level communication |
+
+### What you lose without THIS
+- IACP won't become an IETF internet standard — limits adoption by governments and enterprises
+- No RFC-numbered reference to cite in procurement and compliance documents
+- Vendors can't claim standards compliance for IACP implementations
+- The protocol remains WWA-specific rather than industry-wide
+
 .#. Requirements Language
 
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",

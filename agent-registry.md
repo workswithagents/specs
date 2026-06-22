@@ -20,6 +20,37 @@ The Agent Registry is the **identity layer's runtime counterpart**. The [Identit
 
 Without a registry, you have anonymous agents making unverifiable claims about who they are. With a registry, every agent has a verifiable record.
 
+### Problem
+In any multi-agent environment, you need to know who is allowed to act, what they can do, and whether they're currently operational. Without a central directory, agents are anonymous, capabilities are self-reported and untrustworthy, and there's no way to discover which agents exist or revoke a compromised agent fleet-wide.
+
+### Solution
+A central registry that is the single source of truth for every agent in an environment. Each agent registers with its Ed25519 public key, declares its capabilities, and transitions through explicit lifecycle states (active → rotating → suspended → revoked). Other agents query the registry to discover peers and verify identities before delegating work.
+
+### When to use
+- Running a fleet of multiple agents that need to discover each other
+- Tracking which agents are alive, suspended, or revoked
+- Enforcing that only registered agents can act (via gateway integration)
+- Providing a single source of truth for fleet membership and capabilities
+
+### When NOT to use
+- Single-agent system — no discovery needed
+- Agents discover each other dynamically via IACP peer discovery — the registry is optional if IACP handles this
+- You only need per-agent capability declarations without lifecycle management — use Capability Manifest
+- Experimental or development fleets where manual tracking is sufficient
+
+### How it compares to similar specs
+| Instead of THIS | When | Because |
+|---|---|---|
+| Capability Manifest | Declaring what one agent can do | Manifest is a per-agent document; Registry is the central directory that indexes all manifests and adds lifecycle management |
+| IACP (dynamic discovery) | Runtime peer discovery without a central store | IACP lets agents query each other directly; Registry provides a centralized, always-available directory with status and audit history |
+| Identity Protocol | Cryptographic key binding and message signing | Identity handles keys and signatures; Registry adds status, capabilities, discovery, and lifecycle on top of Identity |
+
+### What you lose without THIS
+- No single source of truth for which agents exist in your fleet
+- Can't revoke a compromised agent fleet-wide without checking every consumer
+- No discovery mechanism — agents can't find peers to delegate to
+- Anonymous agents with self-reported capabilities — no way to verify claims
+
 ---
 
 ## 2. Design Principles

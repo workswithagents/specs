@@ -12,6 +12,37 @@ Define a machine-readable **payment mandate** — a pre-authorized spending agre
 
 Unlike the Agent Economics Protocol (which covers agent-to-agent credit exchange), AP2 mandates govern **how agents spend real or tokenized value** on behalf of a human. This includes API credits, compute budget, SaaS subscriptions, and any resource with a cost.
 
+### Problem
+Agents need to spend money to be useful — API calls, compute, SaaS tools — but giving an agent unrestricted spending authority is reckless. Today, most agent systems either block all spending (limiting capability) or trust the agent completely (risking runaway costs). There's no standard for pre-authorized, machine-enforceable spending budgets.
+
+### Solution
+A machine-readable payment mandate signed by a human principal that sets hard boundaries: per-transaction caps, total budget, expiration date, and which operations require explicit human approval. The mandate is enforced at the agent runtime via a pre-tool-call hook — before any paid tool executes, the agent checks the mandate and either auto-approves (below threshold) or requests human signature.
+
+### When to use
+- Giving an agent a budget to spend on API calls, compute, or SaaS tools
+- Pre-authorizing spending without approving every individual transaction
+- Setting per-provider or per-action spending caps (e.g., max $2 per OpenAI call)
+- Audit-trail requirements for all agent spending
+
+### When NOT to use
+- Agent only uses free tools and APIs — no spending authority needed
+- Human approves every individual spend manually — mandate is unnecessary overhead
+- You need agent-to-agent payments (not human-to-agent) — use Agent Economics instead
+- You need action-level guarantees for individual payment execution — use Transaction Protocol
+
+### How it compares to similar specs
+| Instead of THIS | When | Because |
+|---|---|---|
+| Agent Economics | Agents paying each other for subcontracted work | Economics handles agent-to-agent credit exchange; AP2 handles human-to-agent spending authority |
+| Transaction Protocol | Guaranteeing a specific payment action executed exactly once | Transaction Protocol provides idempotency and rollback for individual actions; AP2 sets the budget boundaries those actions must stay within |
+| AI Gateway | Enforcing policy at the fleet level for all agent requests | Gateway is a centralized enforcement point for fleet-wide policies; AP2 is a per-agent spending mandate embedded in the agent's runtime |
+
+### What you lose without THIS
+- Agents can't spend money autonomously on paid tools — every cost requires manual human approval
+- No hard budget enforcement — agents can silently exceed spending limits
+- No standardized audit trail for agent spending across tools and providers
+- Runaway costs from agent loops become a real risk
+
 ## 2. Design Principles
 
 - **Human-in-the-loop by default** — every mandate requires an authorizing signature from the human principal. Certain operations can waive this via `auto_approve_up_to`.

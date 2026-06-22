@@ -11,6 +11,36 @@ Define how an agent MUST refuse to proceed when information is ambiguous, reques
 
 This is the difference between "the agent guessed" and "the agent asked, was told, and acted on verifiable answers."
 
+### Problem
+When an agent encounters ambiguous input — a missing field, an unclear requirement, a compliance conflict — the worst thing it can do is guess. Silent assumptions propagate errors through multi-step agent pipelines, producing wrong results that are hard to trace back to the original ambiguity. Without structured refusal, ambiguity is invisible until something breaks.
+
+### Solution
+A structured refusal protocol that forces agents to stop, identify exactly which field is ambiguous, offer concrete suggestions, and block all operations that depend on the unresolved gap. Every ask/answer pair is timestamped, signed, and preserved in a clarification chain for audit. The chain proves the agent didn't guess — it asked.
+
+### When to use
+- Agents handling incomplete or ambiguous information from users or other agents
+- Multi-step tasks where ambiguity early in the pipeline causes cascading errors downstream
+- Regulated environments where you must prove no silent assumptions were made
+- Compliance audits that need to show the agent asked the right questions before acting
+
+### When NOT to use
+- All inputs are well-defined and unambiguous — the protocol adds unnecessary overhead
+- A human is available to clarify in real-time without a formal chain
+- The agent can safely use reasonable defaults without compliance risk
+- You need to transfer an entire ambiguous task to another agent — use Handoff instead
+
+### How it compares to similar specs
+| Instead of THIS | When | Because |
+|---|---|---|
+| Handoff Protocol | Transferring an entire task (with its ambiguity) to another agent | Handoff passes the whole session state; Clarification asks targeted questions about specific fields to resolve ambiguity in-place |
+| IACP (query) | Asking another agent for information dynamically | IACP query is a general capability discovery mechanism; Clarification is a structured refusal with audit trail and blocking semantics |
+
+### What you lose without THIS
+- Ambiguity silently propagates through agent pipelines with no audit trail
+- No way to prove an agent didn't guess — compliance auditors can't verify decision-making
+- Multi-step tasks produce wrong results with no traceability to the original gap
+- Errors from silent assumptions are expensive to debug and impossible to attribute
+
 ## 2. Design Principles
 
 - **Refuse, don't guess.** When input is ambiguous, the agent MUST return a structured refusal, never a best-effort assumption.

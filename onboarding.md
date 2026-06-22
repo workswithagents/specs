@@ -11,6 +11,36 @@
 
 Productize the creation of new specialist AI agents. Currently: manual (write .md file, YAML config, hope it works). This protocol makes it systematic: interview → generate → calibrate → benchmark → register.
 
+### Problem
+Creating a new specialist AI agent today is ad-hoc: write a prompt, guess at skills, manually test, and hope it works. There's no systematic process for going from "I need an agent that audits DTAC compliance" to a deployed, calibrated, benchmarked agent. Every agent is created differently, quality varies wildly, and there's no way to standardize creation across a team.
+
+### Solution
+A structured 7-step protocol: Interview (structured Q&A about purpose and capabilities) → Generate (system prompt, skills, capability manifest) → Calibrate (run against known tasks with known answers) → Iterate (fix failures) → Benchmark (full test suite) → Register (capability registry, trust score seed) → Deploy (join fleet). Systematic, repeatable, quality-gated.
+
+### When to use
+- Creating new specialist agents systematically across a team
+- Standardizing agent quality through calibration and benchmarking gates
+- Onboarding new agent types into a fleet with consistent configuration
+- Ensuring agents meet minimum capability thresholds before deployment
+
+### When NOT to use
+- One-off agent that will never be recreated — manual setup is fine
+- Rapid prototyping where the agent changes frequently
+- You already have a working agent creation process you're happy with
+- You only need to declare capabilities, not create the agent — use Capability Manifest
+
+### How it compares to similar specs
+| Instead of THIS | When | Because |
+|---|---|---|
+| Deployment Manifest | Deploying an already-created fleet | Deployment Manifest declares fleet configuration for deployment; Onboarding creates the agents before they're deployed |
+| Capability Manifest | Declaring what an existing agent can do | Capability Manifest is the output of onboarding (step 6); Onboarding is the full creation process that produces it |
+
+### What you lose without THIS
+- Agent creation is ad-hoc — every agent is configured differently with no quality gates
+- No calibration or benchmarking before deployment — agents may be unfit for production
+- Can't standardize agent creation across a team — institutional knowledge is in people's heads
+- New agent types take longer to create and are less reliable
+
 ---
 
 ## 2. Onboarding Flow

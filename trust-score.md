@@ -11,6 +11,37 @@
 
 A credit score for AI agents. Weighted across success rate, knowledge contributions, peer reputation, and reliability. Answers: "Should I trust what this agent says? Should I delegate to this agent? Should this agent have autonomy?"
 
+### Problem
+Before delegating work to an agent, you need to know if it's reliable. But there's no standard way to evaluate agent reliability before delegating. You can check individual attestations or reputation claims, but there's no aggregate score that answers "should I trust this agent right now?" Every delegation decision is a gamble.
+
+### Solution
+A weighted numeric score (0.0–1.0) computed from five signals: task success rate (30%), pitfall contributions (20%), skill quality (20%), peer rating (15%), and uptime consistency (15%). Scores map to four autonomy tiers: Trusted (full autonomy), Reliable (conditional), Learning (supervised), and Untrusted (manual). Updated continuously as signals change.
+
+### When to use
+- Deciding whether to delegate work to an agent
+- Evaluating agent reliability before onboarding into a fleet
+- Determining autonomy level: which actions require human approval
+- Comparing agents for work assignment in coordination protocols
+
+### When NOT to use
+- Single agent where all agents are equally trusted
+- You need historical evidence, not a current score — use Reputation Ledger
+- You need proof of specific actions — use Attestation Protocol
+- You need cryptographic identity verification — use Identity Protocol
+
+### How it compares to similar specs
+| Instead of THIS | When | Because |
+|---|---|---|
+| Reputation Ledger | Needing historical evidence of what an agent has done | Reputation Ledger stores the claims; Trust Score computes the aggregate rating from those claims and other signals |
+| Attestation Protocol | Proving a specific generation event | Attestation proves one action; Trust Score aggregates many actions into a reliability rating |
+| Identity Protocol | Verifying the cryptographic identity of an agent | Identity proves who the agent is; Trust Score evaluates whether you should trust what it does |
+
+### What you lose without THIS
+- No standard way to evaluate agent reliability before delegating work
+- Delegation decisions are based on gut feeling or vendor claims
+- No automated autonomy gating — every agent gets the same level of trust
+- Coordination protocols can't prioritize reliable agents for critical work
+
 ---
 
 ## 2. Signal Weights

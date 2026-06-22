@@ -13,6 +13,36 @@ Define how autonomous AI agents responsibly disclose security vulnerabilities th
 
 Current state: an agent finds "admin access without authentication" and logs it in a public pitfall database. That's dangerous. This protocol makes it safe.
 
+### Problem
+When an AI agent discovers a security vulnerability — an auth bypass, an exposed credential, a SQL injection — there's no standard pipeline for responsible disclosure. The agent might log it publicly (dangerous), the operator might ignore it (irresponsible), or the vendor might never be notified. Security findings from autonomous agents need the same rigor as human-discovered CVEs: private disclosure window, vendor notification, time-boxed remediation, and public disclosure with attribution.
+
+### Solution
+A formal pipeline that transforms agent-discovered exploits into vendor-notified, time-boxed, verifiable disclosures with cryptographic chain of custody from discovery to public record. Findings are auto-classified by severity, private findings trigger a vendor notification with a 7-day acknowledge window and 90-day disclosure deadline, and every state change is signed and logged.
+
+### When to use
+- Agents that audit code, perform penetration testing, or access security-sensitive systems
+- Automated security scanning where agents discover vulnerabilities autonomously
+- Regulated environments where security findings must follow a formal disclosure process
+- Multi-agent corroboration of findings before disclosure
+
+### When NOT to use
+- Agent doesn't interact with security-sensitive systems — no vulnerabilities to disclose
+- Non-security bugs that can be logged publicly — use standard pitfall tracking
+- You only need to prove a finding was discovered — use Attestation Protocol
+- You need to define rules for what constitutes a violation — use Compliance-as-Code
+
+### How it compares to similar specs
+| Instead of THIS | When | Because |
+|---|---|---|
+| Compliance-as-Code | Defining executable compliance rules | Compliance-as-Code defines what rules to check; Security Disclosure defines the pipeline for reporting violations of those rules |
+| Attestation Protocol | Proving that a specific finding was discovered by a specific agent | Attestation proves the discovery event; Security Disclosure manages the full lifecycle from discovery to public disclosure |
+
+### What you lose without THIS
+- Security findings from agents are handled ad-hoc — potentially disclosed publicly before vendors are notified
+- No formal vendor notification pipeline with time-boxed windows
+- No cryptographic chain of custody from discovery to disclosure
+- Agents can't responsibly disclose vulnerabilities — operators must handle it manually
+
 ---
 
 ## 2. Design Principles

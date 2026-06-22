@@ -11,6 +11,37 @@
 
 Docker Compose for AI agent fleets. Declare your entire fleet — agents, capabilities, coordination rules, compliance requirements — in one file. Deploy with one command.
 
+### Problem
+Deploying a multi-agent fleet today is ad-hoc: configure each agent manually, hope they discover each other, pray coordination works. There's no standard way to declare "this is my fleet, these are the agents, here's how they coordinate, here are the compliance rules" in a single reproducible file. Every fleet deployment is a snowflake.
+
+### Solution
+A single YAML manifest that declares the entire fleet: agents (with IDs, roles, capabilities, skills, counts), coordination rules (leader election, work distribution, conflict resolution), and compliance requirements (regulations, audit levels, data sovereignty). Deploy with one command. The manifest is versioned, shareable, and reproducible.
+
+### When to use
+- Deploying multi-agent systems reproducibly across environments
+- Fleet management at scale — defining agent roles, counts, and coordination
+- Embedding compliance requirements directly in fleet configuration
+- Sharing fleet configurations between teams or organizations
+
+### When NOT to use
+- Single agent — the manifest is overkill; configure the agent directly
+- Manual, one-off deployments where reproducibility isn't needed
+- Experimental fleets where configuration changes constantly
+- You need container orchestration — use Kubernetes or Docker Compose for that
+
+### How it compares to similar specs
+| Instead of THIS | When | Because |
+|---|---|---|
+| Kubernetes manifests | Orchestrating containers (not agents) | K8s manages container lifecycle; Deployment Manifest manages agent fleet configuration, coordination rules, and compliance |
+| Docker Compose | Simple multi-container apps | Docker Compose defines container services; Deployment Manifest defines agent roles, capabilities, skills, and governance rules |
+| Capability Manifest | Declaring what one agent can do | Capability Manifest is per-agent; Deployment Manifest is the fleet-level composition of all agents with coordination and compliance rules |
+
+### What you lose without THIS
+- Fleet deployment is ad-hoc — every environment is configured differently
+- No reproducible way to deploy the same fleet configuration across staging and production
+- Coordination rules and compliance requirements are scattered across individual agent configs
+- Onboarding new team members requires documenting the fleet architecture manually
+
 ---
 
 ## 2. Full Manifest

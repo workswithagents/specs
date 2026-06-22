@@ -11,6 +11,37 @@ Define a universal, cross-platform format for AI agent skills. Current ecosystem
 
 An ASFS skill is a self-contained unit of agent knowledge: what it does, when to use it, how to execute it, and what pitfalls to avoid.
 
+### Problem
+Every agent ecosystem (Hermes, Claude Code, Codex, OpenClaw, CrewAI) has its own proprietary skill format. A skill written for one platform is useless on another. This locks developers into ecosystems, prevents skill sharing across teams using different tools, and makes it impossible to build a cross-platform skill marketplace.
+
+### Solution
+A universal, cross-platform format for AI agent skills — a single `.md` file with YAML frontmatter that any agent framework can read. Write once, run anywhere. No dependencies, no package manager, no build step. The format is human-writable and agent-readable, with standard sections for triggers, steps, pitfalls, and verification.
+
+### When to use
+- Building portable skills that work across multiple agent frameworks
+- Distributing skills through a marketplace that serves multiple ecosystems
+- Teams using different agent platforms that want to share skills
+- Publishing open-source skills for community reuse
+
+### When NOT to use
+- You only use one platform and never plan to switch — use the native format
+- One-off tasks that won't be reused — the overhead of packaging isn't worth it
+- You need tool-level protocol integration (not skill-level) — use MCP instead
+- You need structured knowledge representation (not procedural skills) — use OKF
+
+### How it compares to similar specs
+| Instead of THIS | When | Because |
+|---|---|---|
+| MCP (Model Context Protocol) | Integrating tools at the protocol level | MCP defines how agents call tools; ASFS defines what agents know (skills, pitfalls, procedures) |
+| OKF (Open Knowledge Format) | Structured, queryable knowledge representation | OKF is for knowledge graphs and facts; ASFS is for procedural skills with steps and triggers |
+| Native platform formats | You're locked into one ecosystem and happy with it | Each platform's native format may have richer features specific to that platform |
+
+### What you lose without THIS
+- Skills are locked to a single platform — can't reuse across ecosystems
+- No cross-platform skill marketplace can exist
+- Teams using different agent frameworks can't share institutional knowledge
+- Migrating between platforms means rewriting all skills from scratch
+
 ## 2. Design Principles
 
 - **Human-writable + agent-readable** — Markdown with YAML frontmatter. No JSON schema required to author.

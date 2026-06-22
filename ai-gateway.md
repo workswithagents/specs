@@ -15,6 +15,37 @@ Without a gateway, governance is a suggestion. The model can be prompted not to 
 
 The AI Gateway answers: **"Is this action allowed, right now, by this agent?"**
 
+### Problem
+Without a centralized enforcement point, governance is a suggestion. An agent's system prompt can say "don't deploy to production without approval," but prompts aren't enforcement — they're requests. Rate limits, access control, and compliance rules scattered across individual agents are impossible to audit, easy to bypass, and inconsistent.
+
+### Solution
+A single choke point through which every agent request passes before reaching a model, tool, API, or data store. The gateway evaluates machine-readable YAML policies deterministically: who can do what, with what, how many times, and under what conditions. Every decision is logged. Explicit deny always wins.
+
+### When to use
+- Enforcing access control across multiple agents in production
+- Implementing rate limiting and cost controls for model API calls
+- Audit logging of every agent action for compliance
+- Gradual rollout of policies (log → warn → block migration path)
+
+### When NOT to use
+- Single agent with no policy requirements — the overhead isn't worth it
+- Experimental or development environments where enforcement isn't needed
+- All agents are fully trusted and cost isn't a concern
+- You only need authentication without authorization — use the Identity Protocol instead
+
+### How it compares to similar specs
+| Instead of THIS | When | Because |
+|---|---|---|
+| Identity Protocol | Only need to verify who an agent is | Identity handles authentication (who you are); Gateway handles authorization (what you're allowed to do) |
+| Compliance-as-Code | Need executable regulation rules (DTAC, GDPR) | Compliance-as-Code defines the rules for specific regulations; Gateway enforces those rules at request time |
+| Agent Registry | Need to know which agents exist and their status | Registry tells you who the agents are; Gateway decides what those agents can do |
+
+### What you lose without THIS
+- No centralized policy enforcement — governance is a suggestion, not a guarantee
+- Rate limits and access control must be implemented per-agent, inconsistently
+- No unified audit log of all agent actions across the fleet
+- Agents can bypass restrictions by calling models/tools directly
+
 ---
 
 ## 2. Design Principles

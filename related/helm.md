@@ -12,6 +12,43 @@
 
 HELM is a comprehensive LLM evaluation framework operating at the verification layer (L6). WWA's benchmarks (Agent Coding Benchmark, Agent Economics) are agent-specific, evaluating what agents do with models. HELM evaluates the models themselves across multiple dimensions: accuracy, calibration, robustness, fairness, bias, toxicity, and efficiency. The two are complementary — HELM classifies which models are suitable foundation candidates, while WWA benchmarks assess how well those models perform when deployed as agents with tool access and coordination protocols. A WWA agent might use HELM scores to select the best model for a given task type.
 
+### Problem
+
+Choosing a foundation model for an agent is a multi-dimensional decision — a model that scores high on accuracy might be poorly calibrated, or a model that's fast might be biased against certain demographic groups. Most benchmarks evaluate a single dimension (accuracy on MMLU, reasoning on GSM8K), leaving developers to stitch together results from disparate sources. Without a holistic view, model selection becomes guesswork rather than engineering.
+
+### Solution
+
+HELM evaluates models across seven metric categories — accuracy, calibration, robustness, fairness, bias, toxicity, and efficiency — using a standardized interface over 40+ existing benchmarks. Every model runs through the same scenarios and metrics, producing comparable scores across all dimensions. The public leaderboard lets developers see not just which model is "best" but which model is best for their specific tradeoffs: accuracy vs. latency, robustness vs. cost, fairness vs. raw capability.
+
+### When to use
+
+- Selecting a foundation model for an agent deployment when multiple dimensions matter
+- Research comparing LLM architectures across fairness, robustness, and calibration (not just accuracy)
+- Pre-deployment due diligence — checking a model's bias and toxicity scores before exposing it to users
+- Academic research requiring rigorous, reproducible model evaluation methodology
+
+### When NOT to use
+
+- Evaluating agent-specific coding performance — use WWA Agent Coding Benchmark for coding tasks with tool access
+- Simple accuracy-only model comparison — a single benchmark like MMLU is faster and sufficient
+- Production throughput/latency benchmarking — use MLPerf Inference for system-level performance metrics
+- Continuous integration model regression testing — HELM is a comprehensive research framework, not a CI tool
+
+### How it compares to similar specs
+
+| Instead of THIS spec | When | Because |
+|---|---|---|
+| WWA Agent Coding Benchmark | Evaluating agent coding performance with tools | WWA's benchmark tests agent + tool combinations, not raw model capability |
+| GAIA | Evaluating general-purpose agent reasoning and web tool use | GAIA tests agent scaffolding, not the underlying model in isolation |
+| MLPerf | Benchmarking training throughput or inference latency | MLPerf evaluates hardware/system performance, not model quality across dimensions |
+
+### What you lose without THIS spec
+
+- No standardized, multi-dimensional model evaluation across accuracy, calibration, fairness, bias, toxicity, and efficiency
+- Model selection is based on single-metric benchmarks (e.g., MMLU accuracy alone), ignoring critical dimensions like robustness
+- No way to compare models on fairness or toxicity without running separate, incompatible evaluations
+- Stanford CRFM's rigorous academic methodology for reproducible model evaluation
+
 ## Architecture
 
 HELM evaluates models by running them through standardized **scenarios** — task formulations drawn from existing benchmarks (MMLU, TruthfulQA, GSM8K, etc.) reformatted into a consistent input/output interface. Each scenario is evaluated across multiple **metrics** (7 categories: accuracy, calibration, robustness, fairness, bias, toxicity, efficiency). Results are aggregated into a public leaderboard with per-model, per-metric comparisons. The framework supports hundreds of models via API integration (OpenAI, Anthropic, Google, etc.) and local inference. HELM is implemented in Python with a modular adapter architecture.

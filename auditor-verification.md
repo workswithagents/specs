@@ -104,6 +104,37 @@ WWA generates code you can verify — cryptographically. An auditor can prove th
 
 This is the difference between "trust me" and "verify it yourself."
 
+### Problem
+Even with a signed attestation, someone needs to verify it. In regulated industries, auditors must independently confirm that agent-generated code matches its attestation — without trusting the agent operator, the infrastructure, or the timestamps. Currently, verification is ad-hoc: auditors manually check hashes, compare files, and hope nothing was tampered with.
+
+### Solution
+A structured 3-minute verification workflow that eliminates all trust points. The auditor clones the attested commit, verifies the Ed25519 signature, checks the SHA-256 hash chain between inputs and outputs, confirms the generation is deterministic (same inputs → same outputs), and checks key revocation status. Every check is mathematical — zero trust required.
+
+### When to use
+- Third-party auditors verifying agent-generated code for compliance
+- Regulatory assessments requiring independent verification of agent output
+- Proving to a customer or regulator that code wasn't modified post-generation
+- Multi-org scenarios where the verifier doesn't trust the generating org
+
+### When NOT to use
+- Self-attestation is sufficient and no external audit is required
+- You trust the operator and just need a record — use Attestation Protocol alone
+- No compliance or regulatory requirements exist
+- You need to define what rules to check, not verify existing attestations — use Compliance-as-Code
+
+### How it compares to similar specs
+| Instead of THIS | When | Because |
+|---|---|---|
+| Attestation Protocol | You are the agent generating the proof | Attestation generates the proof; Auditor Verification is the independent workflow that checks it |
+| Compliance-as-Code | Defining executable validation rules from regulations | Compliance-as-Code creates the rules; Auditor Verification proves those rules were followed for a specific generation |
+| Identity Protocol | Verifying who signed something | Identity verifies the signer's key; Auditor Verification checks the full attestation chain (signature + hash chain + reproducibility + revocation) |
+
+### What you lose without THIS
+- No standardized third-party verification mechanism for agent-generated output
+- Auditors must invent their own verification process from scratch every time
+- Trust gaps remain — the operator, server, and agent all must be trusted
+- Compliance assessments can't rely on agent attestations without independent verification
+
 ---
 
 ---

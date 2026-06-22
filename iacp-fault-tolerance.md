@@ -17,6 +17,36 @@ Define rigorous error handling for asymmetric inter-agent failures during IACP h
 - **Rollback**: clean restoration of a cached checkpoint when a handoff is abandoned mid-transit
 - **Dead-letter queue**: structured error frames that preserve causal context for audit
 
+### Problem
+When one agent hands off work to another via IACP and the receiving agent crashes, times out, or rejects the state, there's no standard recovery path. The handoff silently fails. Work is lost. The sending agent never knows whether to retry, roll back, or escalate. In production multi-agent systems, silent failures cascade into data loss and unrecoverable state divergence.
+
+### Solution
+A fault-tolerance extension to IACP that defines three error frames (timeout, state rejection, checkpoint unavailable), a structured rollback procedure (freeze → checkpoint → verify → restore → notify → resume), and a dead-letter queue for audit. Every failure is signed, logged, and recoverable — no silent data loss.
+
+### When to use
+- Production multi-agent systems where IACP handoffs are critical path
+- Handoffs that involve state mutations where silent failure causes data corruption
+- Regulated environments where every failed handoff must be auditable
+- Fleets where agents may crash, restart, or lose connectivity unpredictably
+
+### When NOT to use
+- Experimental or development fleets where handoff failures are acceptable
+- Single-agent systems — no handoffs to fail
+- Lossy handoffs are acceptable (e.g., best-effort notifications)
+- You don't use IACP for handoffs — use ECP or another coordination protocol
+
+### How it compares to similar specs
+| Instead of THIS | When | Because |
+|---|---|---|
+| IACP (base protocol) | Basic handoff without fault-tolerance requirements | IACP defines the handoff mechanism; Fault Tolerance adds error recovery, rollback, and dead-letter queuing on top |
+| ECP (Ephemeral Coordination) | Stateless coordination where no fault tolerance is needed | ECP is for lightweight, fire-and-forget coordination; Fault Tolerance is for stateful handoffs that must survive crashes |
+
+### What you lose without THIS
+- Failed IACP handoffs cause silent data loss — no recovery mechanism
+- No standard way to roll back to a checkpoint when a handoff is abandoned mid-transit
+- Error frames aren't signed or auditable — can't prove what went wrong
+- Post-mortem analysis of handoff failures is guesswork without a dead-letter queue
+
 ---
 
 ## 2. Protocol Error Frames

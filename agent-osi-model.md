@@ -19,6 +19,38 @@ This model gives the agent ecosystem a shared language. Each layer has one clear
 
 **This is a framework document, not a standard.** It describes what exists and what's missing. It's designed to be understood by both AI agents (machine-readable structure, served via llms.txt) and humans (clear naming, concrete examples).
 
+### Problem
+When an agent fails today, we say "the agent broke." That's useless — there's no shared vocabulary to isolate whether the model crashed (Layer 1), auth expired (Layer 2), handoff corrupted state (Layer 4), or a compliance rule was violated (Layer 7). Without a layered architecture, debugging is guesswork, infrastructure is monolithic, and every team reinvents the same mental model from scratch.
+
+### Solution
+A 7-layer framework that assigns one clear responsibility to each layer — from Execution (L1) through Governance (L7) — with defined interfaces between them. Engineers can target specific layers when building infrastructure, debug systematically by layer, and identify where standards are missing. It does for agent systems what the OSI model did for networking: create precision where there was ambiguity.
+
+### When to use
+- Understanding how all WWA specs relate to each other
+- Designing agent infrastructure and deciding which layers to invest in first
+- Debugging agent failures by isolating which layer is responsible
+- Identifying gaps where standards don't yet exist
+- Onboarding new engineers to the agent infrastructure landscape
+
+### When NOT to use
+- You just need one specific spec (e.g., Handoff Protocol) — read that spec directly
+- You don't care about architecture or how components fit together
+- You're building a single-agent system with no interop needs
+- You need protocol-level implementation details — this is a framework, individual specs have those
+
+### How it compares to similar specs
+| Instead of THIS | When | Because |
+|---|---|---|
+| OSI model (networking) | Understanding network protocol layering | OSI is about packet networking; this is about agent infrastructure with different concerns (identity, governance, verification) |
+| Individual WWA specs directly | You need implementation details for one protocol | Each spec (Handoff, IACP, Transaction) provides concrete schemas and APIs; the OSI model provides the organizing framework |
+| Capability Manifest | Declaring what a specific agent can do | Capability Manifest is a Layer 3 spec; OSI Model explains why Layer 3 exists and how it connects to other layers |
+
+### What you lose without THIS
+- No shared vocabulary for debugging agent failures systematically
+- No framework to identify which infrastructure layers are missing standards
+- Every team invents its own ad-hoc mental model, making cross-team collaboration harder
+- Can't tell which specs address which concerns without reading all of them
+
 ---
 
 ## The Seven Layers

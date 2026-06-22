@@ -11,6 +11,36 @@
 
 Define what guarantees an autonomous AI agent fleet provides. SLAs for agents — uptime, accuracy, latency, compliance, recovery. For procurement, compliance audits, and enterprise contracts.
 
+### Problem
+Enterprise procurement and compliance teams need guarantees before deploying autonomous agents. But there's no standard way to define or measure what an agent fleet promises: uptime, accuracy, latency, compliance, recovery time. Without SLA tiers, every contract negotiation starts from scratch, procurement can't compare providers, and regulated industries can't accept agent services without defined guarantees.
+
+### Solution
+A tiered SLA framework (Best-Effort → Production → Regulated) defining specific, measurable targets for uptime, accuracy, latency, compliance, and recovery at each tier. Automated breach detection triggers alerts when metrics fall below targets. Monthly SLA reports are auto-generated for compliance evidence.
+
+### When to use
+- Enterprise procurement of agent services requiring defined guarantees
+- Compliance audits where you must show SLA adherence over time
+- Contracting agent services from external providers
+- Defining internal quality targets for your own agent fleet
+
+### When NOT to use
+- Internal-only fleets with no external commitments — formal SLAs are overhead
+- Experimental or hobby projects where best-effort is sufficient
+- You need action-level guarantees (not service-level) — use Transaction Protocol
+- You need payment terms and economic penalties for SLA breaches — use Agent Economics
+
+### How it compares to similar specs
+| Instead of THIS | When | Because |
+|---|---|---|
+| Transaction Protocol | Guaranteeing that individual actions execute correctly | Transaction Protocol handles per-action guarantees (idempotency, rollback); SLA handles fleet-level service guarantees (uptime, accuracy, latency) |
+| Agent Economics | Defining payment terms and penalties for agent work | Economics handles the payment model; SLA defines the quality thresholds that determine whether payment is earned or penalties apply |
+
+### What you lose without THIS
+- No standard for defining what an agent fleet guarantees — every contract is custom
+- Procurement teams can't compare agent service providers on standardized metrics
+- No automated SLA breach detection or monthly compliance reporting
+- Regulated industries can't accept agent services without defined, measurable guarantees
+
 ---
 
 ## 2. SLA Tiers

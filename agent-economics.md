@@ -11,6 +11,37 @@ Define how AI agents pay each other for work. As agent fleets scale, agents will
 
 Think Stripe for agents, not DeFi. No blockchain. Just verifiable accounting.
 
+### Problem
+When one agent subcontracts work to another, there's no standard way to pay for it. Each fleet invents its own accounting: spreadsheets, manual tracking, or just hoping agents do free work. As agent ecosystems scale across organizations, the lack of a payment mechanism blocks real economic exchange between autonomous agents.
+
+### Solution
+A credit-based accounting protocol that lets agents post bounties, claim tasks, complete work, and get paid — all verifiable via cryptographic signatures from third-party verifiers. Compute credits are an accounting abstraction, not a cryptocurrency. Settlement is auditable and penalty-aligned so unreliable agents earn less.
+
+### When to use
+- Subcontracting work from one agent to another within a fleet
+- Building agent marketplaces where tasks have bounties
+- Paying per-task rather than per-time
+- Multi-agent systems where work crosses organizational boundaries
+
+### When NOT to use
+- All agents are owned by the same entity and work is free — no payment needed
+- You need action-level guarantees (did the payment actually execute?) — use the Transaction Protocol instead
+- You need service-level guarantees (uptime, latency, accuracy) — use the SLA Framework
+- You need pre-authorized spending budgets from a human — use AP2 Mandate instead
+
+### How it compares to similar specs
+| Instead of THIS | When | Because |
+|---|---|---|
+| Transaction Protocol | Verifying that a specific payment action executed | Transaction Protocol provides idempotency and rollback guarantees for individual actions; Economics handles the accounting model |
+| SLA Framework | Defining quality-of-service guarantees for agent work | SLA defines what "good enough" means; Economics defines what gets paid and how much |
+| AP2 Mandate | A human wants to pre-authorize an agent's spending budget | AP2 is a human-to-agent spending mandate; Economics is agent-to-agent credit exchange |
+
+### What you lose without THIS
+- No standard way for agents to pay each other for work
+- Every fleet builds its own ad-hoc accounting — not interoperable
+- No economic incentive for agents to prioritize or compete on quality
+- Cross-organization agent economies remain impossible
+
 ## 2. Design Principles
 
 - **Credit-based, not currency** — compute credits are an accounting abstraction. No real money moves until settlement.

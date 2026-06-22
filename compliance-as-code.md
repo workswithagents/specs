@@ -13,6 +13,37 @@ Turn regulation into executable validation rules that AI agents can run against.
 
 Regulators publish PDFs. We translate them into YAML rules that agents validate against.
 
+### Problem
+Regulated industries (healthcare, finance, defence, government) require compliance with hundreds of pages of regulation text. Today, compliance is manual: humans read PDFs, write checklists, and manually verify agent actions. This is slow, error-prone, doesn't scale to autonomous agents, and can't run in CI/CD. An agent can deploy non-compliant code and nobody finds out until audit season.
+
+### Solution
+Translate regulation text into executable YAML validation rules that AI agents run against automatically. A compliance rule defines a trigger (when to check), validation conditions (what to check), and required evidence. Agents validate their own actions against these rules before execution. Compliance becomes a continuous automated process, not a periodic manual review.
+
+### When to use
+- Regulated industries (NHS DTAC, FCA, GDS, GDPR, SOC 2, ISO 27001)
+- Automating compliance checks in CI/CD pipelines
+- Generating compliance evidence for assessments automatically
+- Making compliance rules machine-enforceable rather than human-interpreted
+
+### When NOT to use
+- No regulatory requirements — the overhead of building rule packs isn't justified
+- Manual compliance review is sufficient and automation isn't needed
+- You only need to prove what happened (not whether it was compliant) — use Attestation Protocol
+- You need to verify that compliance claims are true — use Auditor Verification
+
+### How it compares to similar specs
+| Instead of THIS | When | Because |
+|---|---|---|
+| Attestation Protocol | Proving what an agent generated with cryptographic proof | Attestation generates the proof of generation; Compliance-as-Code defines the rules that must be satisfied |
+| Auditor Verification | Independently verifying an existing compliance claim | Auditor Verification checks that rules were followed; Compliance-as-Code defines what those rules are |
+| AI Gateway | Enforcing policy at request time | Gateway enforces allow/deny decisions; Compliance-as-Code provides the regulation-specific rules the gateway evaluates |
+
+### What you lose without THIS
+- Compliance is manual, slow, and doesn't scale to autonomous agent fleets
+- No way to validate agent actions against regulations automatically in CI/CD
+- Compliance evidence must be generated manually for each assessment
+- Regulated industries can't adopt autonomous agents without continuous compliance validation
+
 ---
 
 ## 2. Regulation → Rule Translation

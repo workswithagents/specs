@@ -16,6 +16,37 @@ actually do: parse files, query SQLite, fix bugs, extract with regex,
 validate JSON schemas, fetch concurrently, monitor processes, and
 recover from errors.
 
+### Problem
+Evaluating LLMs for real agent use cases is hard. Existing benchmarks test academic NLP tasks (GLUE, MMLU) or ML training throughput (MLPerf), not the actual tool-use, error-recovery, and practical reasoning agents need. Without a standard benchmark, teams pick models on vibes or vendor claims, and there's no way to compare providers on the same real-world agent tasks.
+
+### Solution
+A 10-task benchmark that tests exactly what agents do: parse files, query SQLite, fix bugs, extract with regex, validate JSON schemas, fetch concurrently, monitor processes, and recover from errors. Every model runs the same tasks under the same tight token budget (40K per task), producing comparable scores that reflect practical agent capability and efficiency.
+
+### When to use
+- Comparing LLM providers for agent workloads before committing to one
+- Publishing benchmark scores to establish model credibility
+- Selecting a model for a specific coding agent deployment
+- Testing whether a new model version is actually better at agent tasks
+
+### When NOT to use
+- You need NLP benchmarks like MMLU, GLUE, or HellaSwag — use HELM instead
+- You're benchmarking ML training/inference throughput — use MLPerf
+- You're evaluating general-purpose agent reasoning (not coding) — use GAIA
+- You're running a single model and don't need comparative scores
+
+### How it compares to similar specs
+| Instead of THIS | When | Because |
+|---|---|---|
+| HELM | Academic NLP evaluation | HELM covers broader NLP tasks (sentiment, QA, summarization); this benchmark is scoped to agent coding |
+| MLPerf | ML training/inference throughput | MLPerf measures hardware+software stack performance; this measures model task capability |
+| GAIA | General agent reasoning | GAIA tests multi-step reasoning with web tools; this focuses on coding and file manipulation tasks |
+
+### What you lose without THIS
+- No standard way to compare LLMs on real agent coding tasks
+- Model selection becomes guesswork based on vendor marketing or vibes
+- No efficiency measurement — models that waste tokens go unpenalized
+- No published, reproducible scores to hold providers accountable
+
 ## Tasks
 
 | # | Task | What it tests |
