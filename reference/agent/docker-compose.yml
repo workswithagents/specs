@@ -1,0 +1,16 @@
+services:
+  wwa-ref-agent:
+    build: .
+    ports:
+      - "8787:8787"
+    environment:
+      WWA_AGENT_ID: "ref-agent-demo"
+      WWA_HOST: "0.0.0.0"
+      WWA_PORT: "8787"
+      WWA_ENDPOINT: "http://localhost:8787"
+      WWA_REGISTRY_URL: "https://registry.workswithagents.dev"
+    volumes:
+      - ref-data:/data
+
+volumes:
+  ref-data:
