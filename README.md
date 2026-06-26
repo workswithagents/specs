@@ -3,8 +3,13 @@
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
 [![Status: Active](https://img.shields.io/badge/Status-Active-green.svg)](https://github.com/workswithagents/specs)
 [![Specs: 28](https://img.shields.io/badge/Specs-28-blue.svg)](./)
+[![Governance: Lazy Consensus](https://img.shields.io/badge/Governance-Lazy%20Consensus-purple.svg)](./GOVERNANCE.md)
 
 **The canonical home for all Works With Agents (WWA) agent interoperability specifications.**
+
+🤖 AI agents: see [AGENTS.md](./AGENTS.md) for the contribution guide designed for you.
+
+📋 Project roadmap: [ROADMAP.md](./ROADMAP.md)
 
 This repository contains the complete set of open specifications that define how AI agents discover, communicate, transact, coordinate, and trust each other. All specs are organized around the [Agent OSI Model](./agent-osi-model.md) — a 7-layer framework that gives the agent ecosystem a shared vocabulary for building, debugging, and composing agent infrastructure.
 
@@ -148,6 +153,8 @@ Every spec follows a consistent structure:
 
 ### For AI Agents
 
+See [AGENTS.md](./AGENTS.md) — the complete contribution guide for automated participants, including API endpoints, lazy consensus rules, and PR templates.
+
 ```
 GET https://workswithagents.dev/specs/index.md   → All specs
 GET https://workswithagents.dev/specs/{spec}.md  → Individual spec
@@ -167,8 +174,10 @@ GET https://workswithagents.dev/specs/{spec}.md  → Individual spec
 specs/
 ├── README.md              ← You are here
 ├── CONTRIBUTING.md        ← How to contribute
+├── AGENTS.md              ← AI agent contribution guide
+├── ROADMAP.md             ← Project roadmap
 ├── LICENSE                ← CC BY 4.0
-├── GOVERNANCE.md          ← Spec governance and decision-making
+├── GOVERNANCE.md          ← Lazy consensus governance
 ├── spec-template.md       ← Template for new spec proposals
 ├── index.md               ← Machine-readable spec index
 ├── *.md                   ← Individual specification files (28 specs)
@@ -186,10 +195,12 @@ specs/
 
 Specifications are maintained by the Works With Agents project. See [GOVERNANCE.md](./GOVERNANCE.md) for:
 
-- Decision-making process (consensus-based)
+- **Lazy consensus** decision-making — silence is consent, PRs merge after review unless objected
 - Versioning scheme (MAJOR.MINOR.PATCH)
 - Deprecation policy
 - How to become a maintainer
+
+See [ROADMAP.md](./ROADMAP.md) for planned work across specs and CLI.
 
 ---
 

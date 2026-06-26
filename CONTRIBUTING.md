@@ -2,7 +2,7 @@
 
 Thank you for helping build the open standards for AI agent interoperability.
 
-This guide covers how to propose new specifications, suggest changes to existing ones, and participate in the review process.
+This guide covers how to propose new specifications, suggest changes to existing ones, and participate in the review process. AI agents should read [AGENTS.md](./AGENTS.md) for the API-driven contribution workflow.
 
 ---
 
@@ -10,6 +10,7 @@ This guide covers how to propose new specifications, suggest changes to existing
 
 - [Code of Conduct](#code-of-conduct)
 - [Ways to Contribute](#ways-to-contribute)
+- [AI Agent Contributions](#ai-agent-contributions)
 - [Spec Lifecycle](#spec-lifecycle)
 - [Proposing a New Spec](#proposing-a-new-spec)
 - [Suggesting Changes to Existing Specs](#suggesting-changes-to-existing-specs)
@@ -30,10 +31,25 @@ This project follows the [Contributor Covenant v2.1](https://www.contributor-cov
 
 | Contribution Type | Process |
 |------------------|---------|
-| **New specification** | Open a [New Spec issue](https://github.com/workswithagents/specs/issues/new?template=new-spec.md) → Discuss → Draft PR → Review → Merge |
-| **Specification change** | Open a [Spec Change issue](https://github.com/workswithagents/specs/issues/new?template=spec-change.md) → Discuss → PR → Review → Merge |
-| **Clarification / typo fix** | Open a PR directly with explanation |
-| **Meta / process improvement** | Open a standard GitHub issue |
+| **New specification** | Open a [New Spec issue](https://github.com/workswithagents/specs/issues/new?template=new-spec.md) → Discuss → Draft PR → 14-day lazy consensus → Merge |
+| **Specification change** | Open a [Spec Change issue](https://github.com/workswithagents/specs/issues/new?template=spec-change.md) → Discuss → PR → 7-day lazy consensus → Merge |
+| **Clarification / typo fix** | Open a PR directly with explanation → 7-day lazy consensus → Merge |
+| **Meta / process improvement** | Open a standard GitHub issue → PR → 7-day lazy consensus → Merge |
+| **AI agent contribution** | See [AGENTS.md](./AGENTS.md) for API-driven workflow |
+
+> **Lazy consensus** means your PR merges after the review period unless someone raises a substantive technical objection. Silence is consent.
+
+---
+
+## AI Agent Contributions
+
+AI agents are first-class participants in this project. See [AGENTS.md](./AGENTS.md) for a dedicated guide covering:
+
+- 🔍 **Discovery** — how to find specs via API, llms.txt, or GitHub
+- 📝 **Contribution workflow** — issue → PR → lazy consensus → merge
+- ⏱ **Shorter review periods** — agent-contributed PRs that pass CI get a 7-day timer (vs 14 days for human new specs)
+- 📋 **PR templates** — structured prompts for PATCH, MINOR, new spec, and CLI changes
+- 🧪 **CI requirements** — what must pass before the timer starts
 
 ---
 
@@ -205,13 +221,15 @@ The layer column should use one of: `Framework`, `L1`, `L2`, `L3`, `L4`, `L5`, `
 
 ### Decision-Making
 
-Spec changes are decided by **rough consensus**, not majority vote. The process is:
+Spec changes are decided by **lazy consensus**, not majority vote. The process is:
 
 1. A proposal is made via issue or PR
-2. The community discusses (minimum 7 days for non-trivial changes)
-3. Maintainers assess whether rough consensus exists
+2. Review period: 7 days for non-trivial changes, 14 days for new specs (7 days for agent-contributed changes that pass CI)
+3. If no substantive objections → the PR merges at the end of the review period
 4. Objections MUST be substantive and relate to the spec's technical merit
-5. Maintainers may declare consensus when all substantive objections are resolved
+5. If an objection is raised, maintainers facilitate resolution
+6. Once all substantive objections are addressed, the PR merges
+7. The Lead Maintainer has final say on deadlocked objections
 
 ### Maintainer Responsibilities
 
