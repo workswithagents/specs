@@ -1,0 +1,19 @@
+service-name: wwa-ref-agent
+
+layers:
+  - L4 — Session (Handoff Protocol)
+  - L5 — Coordination (IACP)
+  - L2/L3 — Identity (Identity Protocol)
+  - L3 — Discovery (Capability Manifest)
+
+endpoint: "http://localhost:8787"
+
+endpoints:
+  health: GET /health
+  manifest: GET /manifest.yaml
+  did: GET /.well-known/did.json
+  iacp: POST /iacp/message
+
+registration:
+  url: "https://registry.workswithagents.dev"
+  auto: true
