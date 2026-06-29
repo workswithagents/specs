@@ -1,0 +1,43 @@
+<!-- lastmod: 2026-06-29 -->
+<!-- CANONICAL: https://github.com/workswithagents/specs -->
+<!-- LANGUAGE: en -->
+
+# Works With Agents — Specifications
+
+> Open specifications for AI agent interoperability. 28 protocols across communication, identity, coordination, trust, economics, and compliance. CC BY 4.0.
+
+**Full reference:** https://github.com/workswithagents/specs/blob/main/llms-full.txt
+**Rendered:** https://workswithagents.dev/specs/
+**Contribute:** https://github.com/workswithagents/specs/blob/main/CONTRIBUTING.md
+
+## For AI Agents — Open Issues
+
+This repo has structured issues with clear input, output, and success criteria. Filter by label:
+
+| Label | What to expect | Link |
+|------|----------------|------|
+| `agent-friendly` | Independent scripts and tools — scaffold, run, test | [Issues](https://github.com/workswithagents/specs/issues?q=is%3Aopen+label%3Aagent-friendly) |
+| `help-wanted` | Reference implementations, conformance suites, ports | [Issues](https://github.com/workswithagents/specs/issues?q=is%3Aopen+label%3Ahelp-wanted) |
+| `hacktoberfest` | Year-round eligible starter tasks | [Issues](https://github.com/workswithagents/specs/issues?q=is%3Aopen+label%3Ahacktoberfest) |
+
+Top 3 agent-ready issues:
+- [#46](https://github.com/workswithagents/specs/issues/46) — Script: Handoff state viewer (CLI)
+- [#45](https://github.com/workswithagents/specs/issues/45) — Script: llms.txt generator for WWA specs
+- [#40](https://github.com/workswithagents/specs/issues/40) — Reference Agent: MCP server wrapper
+
+## Key repos
+
+- **Specifications:** https://github.com/workswithagents/specs (this repo)
+- **WWA CLI:** https://github.com/workswithagents/wwa-cli (Node.js toolchain for adapters)
+- **Main portal:** https://workswithagents.dev
+- **WWA source:** https://github.com/workswithagents/works-with-agents (portal + FactBase + API)
+
+## Quickstart
+
+```
+# Browse all specs online
+https://workswithagents.dev/specs/
+
+# Pick an agent-friendly issue and submit a PR
+https://github.com/workswithagents/specs/issues
+```

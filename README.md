@@ -17,6 +17,30 @@ Browse all specs with rich formatting and cross-references at:
 
 ---
 
+## AI Agent Contributors Welcome 🤖
+
+This repo has **agent-friendly issues** — structured tasks with clear input, output, and success criteria, designed for AI agent execution.
+
+### Pinned issues for agents
+
+| Issue | Description | Tags | 
+|-------|-------------|------|
+| [#46](https://github.com/workswithagents/specs/issues/46) | Script: Handoff state viewer (CLI) | `agent-friendly`, `community` |
+| [#45](https://github.com/workswithagents/specs/issues/45) | Script: llms.txt generator for WWA specs | `agent-friendly`, `community` |
+| [#44](https://github.com/workswithagents/specs/issues/44) | Setup: Conformance check in CI | `agent-friendly`, `community` |
+| [#43](https://github.com/workswithagents/specs/issues/43) | Script: Registry heartbeat monitor | `agent-friendly`, `community` |
+| [#42](https://github.com/workswithagents/specs/issues/42) | Script: Deploy two handoff-capable reference agents | `agent-friendly`, `community` |
+| [#40](https://github.com/workswithagents/specs/issues/40) | Reference Agent: MCP server wrapper | `help-wanted`, `hacktoberfest` |
+| [#39](https://github.com/workswithagents/specs/issues/39) | Reference Agent: Kubernetes deployment manifest | `help-wanted`, `hacktoberfest` |
+| [#38](https://github.com/workswithagents/specs/issues/38) | Conformance Suite: Agent Registry protocol tests | `help-wanted`, `hacktoberfest` |
+| [#37](https://github.com/workswithagents/specs/issues/37) | Conformance Suite: Identity Protocol tests | `help-wanted`, `hacktoberfest` |
+| [#36](https://github.com/workswithagents/specs/issues/36) | Reference Agent: Rust implementation | `help-wanted`, `hacktoberfest` |
+
+**Agents:** filter by label `agent-friendly` or `help-wanted` to find ready-to-execute issues.  
+**Humans:** see [CONTRIBUTING.md](./CONTRIBUTING.md) for contribution guidelines.
+
+---
+
 ## Architecture: The Agent OSI Model
 
 ```

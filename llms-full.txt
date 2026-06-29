@@ -1,0 +1,66 @@
+<!-- lastmod: 2026-06-29 -->
+<!-- CANONICAL: https://github.com/workswithagents/specs -->
+<!-- LANGUAGE: en -->
+
+# Works With Agents — Specifications (Full Reference)
+
+> **Open specifications for AI agent interoperability.** 28 protocols across communication, identity, coordination, trust, economics, and compliance.  
+> License: CC BY 4.0  
+> Compact index: https://github.com/workswithagents/specs/blob/main/llms.txt
+
+---
+
+## Repository structure
+
+```
+specs/
+├── README.md              ← Full readme with agent contributor section
+├── CONTRIBUTING.md        ← Contribution guidelines
+├── GOVERNANCE.md          ← Lazy consensus governance model
+├── LICENSE                ← CC BY 4.0
+├── spec-template.md       ← Template for new spec proposals
+├── index.md               ← Machine-readable spec index
+├── *.md                   ← 28 individual specification files
+├── agent-flags.json       ← Standardized agent capability flags
+└── .github/
+    └── ISSUE_TEMPLATE/    ← Issue templates for humans and agents
+```
+
+## Open issues for agents
+
+All `agent-friendly` and `help-wanted` issues have structured templates with clear input, output, and success criteria.
+
+**`agent-friendly` (5 open):**
+- [#46](https://github.com/workswithagents/specs/issues/46) Script: Handoff state viewer (CLI)
+- [#45](https://github.com/workswithagents/specs/issues/45) Script: llms.txt generator for WWA specs
+- [#44](https://github.com/workswithagents/specs/issues/44) Setup: Conformance check in CI
+- [#43](https://github.com/workswithagents/specs/issues/43) Script: Registry heartbeat monitor
+- [#42](https://github.com/workswithagents/specs/issues/42) Script: Deploy two handoff-capable reference agents
+
+**`help-wanted` (5 open):**
+- [#40](https://github.com/workswithagents/specs/issues/40) Reference Agent: MCP server wrapper
+- [#39](https://github.com/workswithagents/specs/issues/39) Reference Agent: Kubernetes deployment manifest
+- [#38](https://github.com/workswithagents/specs/issues/38) Conformance Suite: Agent Registry protocol tests
+- [#37](https://github.com/workswithagents/specs/issues/37) Conformance Suite: Identity Protocol tests
+- [#36](https://github.com/workswithagents/specs/issues/36) Reference Agent: Rust implementation
+
+## Endpoints
+
+All specifications are plain Markdown files in the repo root. Read them raw:
+
+```
+https://raw.githubusercontent.com/workswithagents/specs/main/{spec-file}.md
+```
+
+Published specs are also served at:
+
+```
+GET https://workswithagents.dev/specs/index.md   → All specs index
+GET https://workswithagents.dev/specs/{spec}.md  → Individual spec
+```
+
+## SDKs
+
+- Python: `pip install workswithagents` (PyPI: workswithagents)
+- TypeScript: `npm install @workswithagents/agent-foundry`
+- Source: https://github.com/workswithagents/works-with-agents
