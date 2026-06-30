@@ -1,0 +1,21 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "wwa-mcp-server"
+version = "0.1.0"
+description = "MCP server wrapper for the WWA Reference Agent"
+readme = "README.md"
+license = { text = "CC BY 4.0" }
+requires-python = ">=3.11"
+dependencies = [
+    "mcp[cli]>=1.0.0",
+    "httpx>=0.28.0",
+]
+
+[project.scripts]
+wwa-mcp-server = "server:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["."]
